@@ -213,6 +213,7 @@
         </div>
         <div class="card"><div class="section-title">Stock / Par Status</div><div class="table-wrap"><table><thead><tr><th>Store</th><th>Item</th><th>Current</th><th>Par</th><th>Gap</th><th>Suggested Order</th><th>Status</th></tr></thead><tbody id="stockParTable"></tbody></table></div></div>
         <div class="card"><div class="section-title">Usage Engine (Sales → Stock)</div><div class="table-wrap"><table><thead><tr><th>Store</th><th>Product</th><th>Used</th><th>Projected After Usage</th><th>Est Cost Used</th><th>Suggested Order</th></tr></thead><tbody id="usageEngineTable"></tbody></table></div></div>
+        <div class="card"><div class="section-title">Supplier Order Planner</div><div class="list" id="supplierOrderPlanner"></div></div>
       </section>
 
       <section id="screen-staff" class="screen hidden">
@@ -540,6 +541,10 @@
             });
           });
           document.getElementById('usageEngineTable').innerHTML = usageRows.join('');
+          document.getElementById('supplierOrderPlanner').innerHTML = (data.stockSystem.supplierOrders || []).map(s => {
+            const storeBlocks = Object.entries(s.stores || {}).map(([store, rows]) => `<div class="meta"><strong>${store}</strong>: ${rows.map(r => `${r.itemName} (${r.suggestedOrderPacks} packs)`).join(', ')}</div>`).join('');
+            return `<div class="item"><div>${s.supplierName}</div><div class="meta">Lead time: ${s.leadDays || '?'} days · ${s.totalLines} line(s)</div>${storeBlocks}</div>`;
+          }).join('') || '<div class="small">No supplier orders suggested yet.</div>';
           opsAlerts = [
             { text:`${Object.values(data.stockSystem.stores || {}).reduce((sum, s) => sum + (s.belowParCount || 0), 0)} items are below par across both stores.`, meta:'Order planning needed' },
             { text:`${Object.values(data.stockSystem.stores || {}).reduce((sum, s) => sum + (s.uncountedCount || 0), 0)} items are still uncounted.`, meta:'Staff stock take workflow next' },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T08:05:31.222Z",
+  "generatedAt": "2026-04-07T08:07:59.749Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
@@ -1096,6 +1096,60 @@
         "uncountedCount": 4
       }
     },
+    "supplierOrders": [
+      {
+        "supplierId": "bidfood",
+        "supplierName": "Bidfood",
+        "leadDays": 2,
+        "stores": {
+          "winthrop": [
+            {
+              "itemKey": "chips",
+              "itemName": "Chips",
+              "suggestedOrderPacks": 4,
+              "gap": 40,
+              "unit": "kg"
+            }
+          ],
+          "melville": [
+            {
+              "itemKey": "chips",
+              "itemName": "Chips",
+              "suggestedOrderPacks": 4,
+              "gap": 35,
+              "unit": "kg"
+            }
+          ]
+        },
+        "totalLines": 2
+      },
+      {
+        "supplierId": "pfd",
+        "supplierName": "PFD",
+        "leadDays": 2,
+        "stores": {
+          "winthrop": [
+            {
+              "itemKey": "oil",
+              "itemName": "Oil",
+              "suggestedOrderPacks": 3,
+              "gap": 12,
+              "unit": "bottles"
+            }
+          ],
+          "melville": [
+            {
+              "itemKey": "oil",
+              "itemName": "Oil",
+              "suggestedOrderPacks": 3,
+              "gap": 10,
+              "unit": "bottles"
+            }
+          ]
+        },
+        "totalLines": 2
+      }
+    ],
     "summary": {
       "openChecklists": 0,
       "closeChecklists": 0,
@@ -1106,7 +1160,8 @@
     "notes": [
       "Par levels are now part of the dashboard data layer.",
       "Current stock counts still need staff input workflow.",
-      "Suggested orders are generated from par gap once counts are entered."
+      "Suggested orders are generated from par gap once counts are entered.",
+      "Supplier order planning now groups suggested buys by supplier and store."
     ]
   },
   "commandCentre": {
