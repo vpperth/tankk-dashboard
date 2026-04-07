@@ -138,7 +138,7 @@
 
         <div class="grid two-col">
           <div class="card">
-            <div class="section-title">Priority Board</div>
+            <div class="section-title">Owner Priorities</div>
             <div class="list" id="priorityBoard"></div>
           </div>
           <div class="card">
@@ -151,6 +151,17 @@
           <div class="card">
             <div class="section-title">Sales Trend</div>
             <canvas id="commandSalesChart"></canvas>
+          </div>
+          <div class="card">
+            <div class="section-title">Uber Growth Ideas</div>
+            <div class="list" id="uberGrowthIdeas"></div>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <div class="section-title">Sale Value Drivers</div>
+            <div class="list" id="saleValueDrivers"></div>
           </div>
           <div class="card">
             <div class="section-title">Latest Handovers</div>
@@ -203,6 +214,11 @@
       </section>
 
       <section id="screen-staff" class="screen hidden">
+        <div class="grid three-col">
+          <div class="card"><div class="section-title">This Month’s Special</div><div class="metric" id="staffSpecial">Battered Fetta</div><div class="small">What staff should push right now</div></div>
+          <div class="card"><div class="section-title">Today’s Focus</div><div class="small" id="staffFocus">Push the monthly special and tighten Uber bag checks.</div></div>
+          <div class="card"><div class="section-title">Upsell Prompt</div><div class="small" id="staffUpsell">Offer tartare or extra salad with fish packs.</div></div>
+        </div>
         <div class="grid two-col">
           <div class="card">
             <div class="section-title">Staff Portal</div>
@@ -216,6 +232,10 @@
             <div class="section-title">Submission Form</div>
             <div id="staffFormBody"><div class="small">Choose shift type and load the form.</div></div>
           </div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="section-title">Feedback To Fix</div><div class="list" id="staffFeedbackFix"></div></div>
+          <div class="card"><div class="section-title">Store Review Snapshot</div><div class="list" id="staffReviewSnapshot"></div></div>
         </div>
       </section>
 
@@ -255,38 +275,38 @@
       { date:'2026-03-26', winthrop:0, melville:0, notes:'Missing data / failed sync sample' }
     ];
 
-    const priorities = [
+    let priorities = [
       { text:'Backfill Mar 30 - Apr 6 sales immediately so owner view is current.', meta:'Highest priority' },
       { text:'Replace checklist-first layout with full owner operating system.', meta:'In progress now' },
       { text:'Wire persistent submissions backend so ops issues show up centrally.', meta:'Backend required' },
       { text:'Expose cron jobs visibly: sales sync, weekly brief, marketing prompts.', meta:'Automation panel' },
     ];
 
-    const handovers = [
+    let handovers = [
       { text:'Winthrop close: fish count done, tablet 2 battery low.', meta:'Jake · Yesterday 8:45 PM' },
       { text:'Melville open: fryer temp fine, lemons low, more ordered.', meta:'Sarah · Yesterday 4:20 PM' },
       { text:'Winthrop close: UE wrong orders issue, customer refunded.', meta:'Mike · 2 days ago' },
     ];
 
-    const marketingActions = [
+    let marketingActions = [
       { text:'Build April-June marketing panel from existing social calendar and special items plan.', meta:'Battered Fetta → Calamari → Barramundi' },
       { text:'Show weekly posting queue with approval-needed flag before anything public.', meta:'No posting without Paul sign-off' },
       { text:'Track ad spend, promo ROI, retention tasks, and upcoming local dates.', meta:'Mother’s Day / school holidays / etc.' },
     ];
 
-    const campaignQueue = [
+    let campaignQueue = [
       { text:'April special: Battered Fetta', meta:'Current feature' },
       { text:'Best posting slot: 11am–12:30pm', meta:'Source: planner audience insight' },
       { text:'Ad budget baseline: $150/week', meta:'Scale if ROI works' },
     ];
 
-    const opsAlerts = [
+    let opsAlerts = [
       { text:'Melville close had an incomplete submission sample in prototype data.', meta:'Needs real backend alerting' },
       { text:'Chicken fillet variance flagged in stock sample.', meta:'Expected 40, counted 28' },
       { text:'Need unresolved issues feed, not just one-off notes.', meta:'Ops module rebuild' },
     ];
 
-    const opsNotes = [
+    let opsNotes = [
       { text:'Open/close misses should roll up by store and by task.', meta:'E.g. fish count, lockup, photos, dishwasher' },
       { text:'Maintenance / issue log should sit here too.', meta:'Not buried in handovers' },
     ];
@@ -302,6 +322,19 @@
       { text:'Model locked to Sonnet 4.6 only. No silent fallback.', meta:'Config updated today' },
       { text:'GitHub Pages is live, but frontend needs rebuild around Tankk OS.', meta:'This file is the new direction' },
       { text:'Need one clean backend for submissions + automation status.', meta:'Don’t scatter data' },
+    ];
+
+    let uberGrowthIdeas = [
+      { text:'Bundle fish + chips + drink more clearly on Uber.', meta:'Menu optimisation' },
+      { text:'Fix cold-chip complaints by tightening packaging and prep timing.', meta:'Service + product quality' },
+      { text:'Push best-converting delivery items harder.', meta:'Revenue lift' },
+    ];
+
+    let saleValueDrivers = [
+      { text:'Visible COGS control', meta:'Margin discipline' },
+      { text:'Checklist compliance trend', meta:'Operational consistency' },
+      { text:'Improving reviews and service quality', meta:'Brand strength' },
+      { text:'Less owner dependency', meta:'Sale attractiveness' },
     ];
 
     const checklists = {
@@ -339,6 +372,10 @@
     function renderLists(){
       document.getElementById('priorityBoard').innerHTML = priorities.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
       document.getElementById('handoverFeed').innerHTML = handovers.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('uberGrowthIdeas').innerHTML = uberGrowthIdeas.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('saleValueDrivers').innerHTML = saleValueDrivers.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('staffFeedbackFix').innerHTML = (window.staffFeedbackToFix || []).map(x => `<div class="item">${x}</div>`).join('') || '<div class="small">No feedback loaded yet.</div>';
+      document.getElementById('staffReviewSnapshot').innerHTML = (window.staffReviewSnapshot || []).map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('') || '<div class="small">Select a store to see review themes.</div>';
       document.getElementById('marketingActions').innerHTML = marketingActions.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
       document.getElementById('campaignQueue').innerHTML = campaignQueue.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
       document.getElementById('opsAlerts').innerHTML = opsAlerts.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
@@ -388,6 +425,19 @@
       ]},options:{responsive:true,plugins:{legend:{labels:{color:'#cbd5e1'}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{display:false}},y:{ticks:{color:'#94a3b8'},grid:{color:'rgba(255,255,255,.06)'}}}}});
     }
 
+    function refreshStaffSnapshot(){
+      const store = document.getElementById('staffStore').value;
+      const data = window.tankkOsData || {};
+      const snap = data.staffApp?.reputationSnapshots?.[store] || {};
+      window.staffReviewSnapshot = [
+        ...(snap.uber || []).map(x => ({ text:x, meta:'Uber feedback' })),
+        ...(snap.google || []).map(x => ({ text:x, meta:'Google review theme' }))
+      ];
+      renderLists();
+    }
+
+    document.getElementById('staffStore').addEventListener('change', refreshStaffSnapshot);
+
     function loadStaffForm(){
       const store = document.getElementById('staffStore').value;
       const shift = document.getElementById('staffShiftType').value;
@@ -416,6 +466,7 @@
         const res = await fetch('tankk-os-data.json', { cache: 'no-store' });
         if(!res.ok) return;
         const data = await res.json();
+        window.tankkOsData = data;
         if(data.commandCentre){
           weekly = {
             combined: {
@@ -448,6 +499,18 @@
             melville: d.melville || 0,
             notes: d.notes || ''
           }));
+        }
+        if(data.productVision?.ownerTier?.purpose){
+          priorities = (data.ownerInsights?.priorities || []).map(x => ({ text:x, meta:'Owner priority' }));
+          uberGrowthIdeas = (data.ownerInsights?.uberGrowthIdeas || []).map(x => ({ text:x, meta:'Uber growth engine' }));
+          saleValueDrivers = (data.ownerInsights?.saleValueDrivers || []).map(x => ({ text:x, meta:'Sale value driver' }));
+        }
+        if(data.staffApp){
+          document.getElementById('staffSpecial').textContent = data.staffApp.thisMonthSpecial || '—';
+          document.getElementById('staffFocus').textContent = data.staffApp.todayFocus || '—';
+          document.getElementById('staffUpsell').textContent = data.staffApp.upsellPrompt || '—';
+          window.staffFeedbackToFix = data.staffApp.feedbackToFix || [];
+          refreshStaffSnapshot();
         }
         if(data.automationSummary){
           const jobs = data.automationSummary.jobs || [];

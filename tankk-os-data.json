@@ -1,9 +1,92 @@
 {
-  "generatedAt": "2026-04-07T05:57:30.825Z",
+  "generatedAt": "2026-04-07T07:23:01.514Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
     "combined": 28500
+  },
+  "productVision": {
+    "ownerTier": {
+      "modules": [
+        "command-centre",
+        "sales-growth",
+        "stock-cogs-ordering",
+        "labour-team-discipline",
+        "customer-voice",
+        "uber-growth-engine",
+        "marketing-hub",
+        "sale-pack"
+      ],
+      "purpose": "Control the business, grow sales, reduce owner effort, and improve sale value."
+    },
+    "staffTier": {
+      "modules": [
+        "staff-home",
+        "open-checklist",
+        "stock-take",
+        "issue-log",
+        "close-checklist",
+        "feedback-push-board"
+      ],
+      "purpose": "Help staff run better shifts, protect service standards, and surface issues early."
+    }
+  },
+  "staffApp": {
+    "todayFocus": "Push this month’s special and tighten delivery bag checks.",
+    "thisMonthSpecial": "Battered Fetta",
+    "upsellPrompt": "Offer tartare or extra salad with fish packs.",
+    "feedbackToFix": [
+      "Cold chips mentioned in Uber feedback",
+      "Missing sauce complaints need bag-check discipline"
+    ],
+    "reputationSnapshots": {
+      "winthrop": {
+        "uber": [
+          "Cold chips mentioned 3 times this week",
+          "Fish quality praised in recent delivery feedback"
+        ],
+        "google": [
+          "Fresh fish and friendly staff praised",
+          "Wait time complaints still showing up"
+        ]
+      },
+      "melville": {
+        "uber": [
+          "Order accuracy stronger than Winthrop this week",
+          "Packaging quality holding up well"
+        ],
+        "google": [
+          "Crispy chips praised repeatedly",
+          "A few comments mention delivery delay perception"
+        ]
+      }
+    },
+    "smartPrompts": [
+      "Double-check Uber bags before handoff",
+      "Mention the monthly special to dine-in and pickup customers",
+      "Count low-stock items before close"
+    ]
+  },
+  "ownerInsights": {
+    "priorities": [
+      "Reduce owner dependence with proper staff checklists and issue logging.",
+      "Build stock count + par level system to control COGS and ordering.",
+      "Use Uber and Google feedback to fix service and lift delivery sales.",
+      "Turn marketing into a scheduled growth engine, not ad-hoc effort."
+    ],
+    "uberGrowthIdeas": [
+      "Create clearer Uber bundles around high-converting fish items.",
+      "Investigate cold-chip complaints during peak delivery windows.",
+      "Promote best-performing Uber items more aggressively in-app and in store.",
+      "Tighten packaging and bag-check process to cut refunds and rating drag."
+    ],
+    "saleValueDrivers": [
+      "Visible COGS control",
+      "Checklist compliance trend",
+      "Improving review quality",
+      "Less owner dependency",
+      "Documented growth engine"
+    ]
   },
   "commandCentre": {
     "weeklySales": 24370.75,
@@ -23,7 +106,17 @@
       "customers": 445,
       "uberRevenue": 2650.5,
       "uberOrders": 125,
-      "achievementPct": 86
+      "achievementPct": 86,
+      "reviewSnapshot": {
+        "uber": [
+          "Cold chips mentioned 3 times this week",
+          "Fish quality praised in recent delivery feedback"
+        ],
+        "google": [
+          "Fresh fish and friendly staff praised",
+          "Wait time complaints still showing up"
+        ]
+      }
     },
     "melville": {
       "weeklyRevenue": 11520.25,
@@ -31,7 +124,17 @@
       "customers": 385,
       "uberRevenue": 2570.25,
       "uberOrders": 140,
-      "achievementPct": 85
+      "achievementPct": 85,
+      "reviewSnapshot": {
+        "uber": [
+          "Order accuracy stronger than Winthrop this week",
+          "Packaging quality holding up well"
+        ],
+        "google": [
+          "Crispy chips praised repeatedly",
+          "A few comments mention delivery delay perception"
+        ]
+      }
     }
   },
   "dailySales": [
@@ -225,6 +328,11 @@
       "mode": "export-json",
       "live": true,
       "note": "Automation export contains 8 jobs."
+    },
+    "reviews": {
+      "mode": "manual-insight-placeholder",
+      "live": false,
+      "note": "Uber and Google feedback concepts added to dashboard structure; ingestion still to be built."
     }
   }
 }
