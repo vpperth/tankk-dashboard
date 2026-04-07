@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-04-07T05:56:00Z",
+  "source": "FoundU",
+  "live": false,
+  "status": "schema-ready",
+  "summary": {
+    "weekWages": 0,
+    "labourPct": 0,
+    "pendingApprovals": 0,
+    "flaggedShifts": 0
+  },
+  "stores": {
+    "winthrop": {
+      "weekWages": 0,
+      "labourPct": 0
+    },
+    "melville": {
+      "weekWages": 0,
+      "labourPct": 0
+    }
+  },
+  "notes": [
+    "FoundU API key exists but live labour pull not wired yet.",
+    "This file is the schema placeholder for the live build."
+  ]
+}

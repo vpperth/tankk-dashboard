@@ -1,0 +1,134 @@
+{
+  "generatedAt": "2026-04-07T05:57:03.533Z",
+  "totalJobs": 8,
+  "jobs": [
+    {
+      "id": "c21dd99b-eacf-455d-b24c-67e94e895523",
+      "name": "Tankk Daily Sales Sync",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * *",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "isolated",
+      "status": "error",
+      "lastRunAtMs": 1775480400004,
+      "nextRunAtMs": 1775566800000,
+      "consecutiveErrors": 16,
+      "lastError": "cron: job execution timed out"
+    },
+    {
+      "id": "3bae4312-6ea1-454c-b230-c1eeb853256f",
+      "name": "Approve wages in Foundry",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 5",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "main",
+      "status": "ok",
+      "lastRunAtMs": 1775178000003,
+      "nextRunAtMs": 1775782800000,
+      "consecutiveErrors": 0,
+      "lastError": null
+    },
+    {
+      "id": "6b8673b8-0ea9-4671-945c-cf050b780317",
+      "name": "Found U Wage Approval - Friday 9am",
+      "enabled": true,
+      "schedule": {
+        "expr": "0 9 * * 5",
+        "kind": "cron",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "isolated",
+      "status": "error",
+      "lastRunAtMs": 1775178050078,
+      "nextRunAtMs": 1775782800000,
+      "consecutiveErrors": 4,
+      "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel."
+    },
+    {
+      "id": "26859d30-54cf-4000-a4a4-6e21fc60a04a",
+      "name": "Sales Brief",
+      "enabled": true,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 604800000,
+        "anchorMs": 1773584231167
+      },
+      "sessionTarget": "isolated",
+      "status": "error",
+      "lastRunAtMs": 1775398631177,
+      "nextRunAtMs": 1776003431177,
+      "consecutiveErrors": 3,
+      "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel."
+    },
+    {
+      "id": "93f65ae5-07f3-4b12-b813-30943bc075e5",
+      "name": "Tankk Weekly Sales Brief",
+      "enabled": true,
+      "schedule": {
+        "expr": "0 6 * * 1",
+        "kind": "cron",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "main",
+      "status": "ok",
+      "lastRunAtMs": 1775426643988,
+      "nextRunAtMs": 1776031200000,
+      "consecutiveErrors": 0,
+      "lastError": null
+    },
+    {
+      "id": "f8dd169e-0581-4d4a-a65c-703131800c92",
+      "name": "Weekly Sales Report — Tankk",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 6 * * 1",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "isolated",
+      "status": "error",
+      "lastRunAtMs": 1775426400003,
+      "nextRunAtMs": 1776031200000,
+      "consecutiveErrors": 4,
+      "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel."
+    },
+    {
+      "id": "9d7ed8b7-5d6d-4fa8-ad25-de908b536052",
+      "name": "Sales Brief - Weekly Data Pull",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * 1",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "isolated",
+      "status": "error",
+      "lastRunAtMs": 1775433703262,
+      "nextRunAtMs": 1776038400000,
+      "consecutiveErrors": 1,
+      "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel."
+    },
+    {
+      "id": "e7633c06-5d73-492a-9f5e-ba8cb7e778c2",
+      "name": "Sales Brief - Weekly Data Pull",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * 1",
+        "tz": "Australia/Perth"
+      },
+      "sessionTarget": "isolated",
+      "status": "error",
+      "lastRunAtMs": 1775433600003,
+      "nextRunAtMs": 1776038400000,
+      "consecutiveErrors": 3,
+      "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel."
+    }
+  ]
+}
