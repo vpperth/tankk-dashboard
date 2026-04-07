@@ -3,315 +3,418 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tankk Dashboard</title>
+  <title>Tankk OS</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-:root{--bg:#0f172a;--panel:#111827;--border:#243041;--text:#e5e7eb;--muted:#94a3b8;--orange:#f97316;--orange2:#fb923c;--green:#22c55e;--red:#ef4444;--blue:#38bdf8;--yellow:#facc15}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.landing{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:24px;padding:40px}
-.landing h1{font-size:2.5rem;background:linear-gradient(90deg,var(--orange),var(--orange2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.landing p{color:var(--muted);font-size:1.1rem}
-.landing-btns{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
-.btn-land{padding:24px 48px;border-radius:16px;font-size:1.2rem;font-weight:800;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s}
-.btn-land.owner{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff}
-.btn-land.staff{background:var(--panel);color:var(--text);border:2px solid var(--border)}
-.btn-land:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
-.screen{display:none;min-height:100vh}.screen.active{display:block}
-.topbar{display:flex;align-items:center;gap:16px;padding:16px 24px;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-.back-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:700}
-.topbar h2{flex:1;font-size:1.1rem;color:var(--muted)}
-.live{background:rgba(34,197,94,.15);color:var(--green);padding:4px 12px;border-radius:999px;font-size:.8rem;font-weight:700}
-.container{max-width:1200px;margin:0 auto;padding:24px}
-.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
-.summary-2col{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;margin-bottom:20px}
-.portal-2col{display:grid;grid-template-columns:1fr 1.4fr;gap:18px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
-.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700;margin-bottom:8px}
-.metric{font-size:1.8rem;font-weight:800;margin-bottom:4px}
-.small{color:var(--muted);font-size:.85rem}
-.progress{height:6px;background:#182133;border-radius:999px;overflow:hidden;margin-top:10px}
-.progress>div{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:999px}
-.tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.75rem;font-weight:700}
-.good{background:rgba(34,197,94,.14);color:var(--green)}.bad{background:rgba(239,68,68,.14);color:var(--red)}.warn{background:rgba(250,204,21,.12);color:var(--yellow)}.blue{background:rgba(56,189,248,.14);color:var(--blue)}
-.alert-list{display:flex;flex-direction:column;gap:10px}
-.alert{padding:12px 14px;border-radius:10px;font-size:.9rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
-.alert-red{border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08)}.alert-green{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08)}.alert-yellow{border-color:rgba(250,204,21,.3);background:rgba(250,204,21,.08)}
-.alert-meta{font-size:.75rem;color:var(--muted);margin-top:4px}
-.store-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.store-row:last-child{border-bottom:none}.store-name{font-weight:800;min-width:80px}
-.store-bars{flex:1;display:flex;flex-direction:column;gap:4px}
-.store-bar{height:8px;background:#182133;border-radius:4px;overflow:hidden}.store-bar-fill{height:100%;border-radius:4px}
-.store-w .store-bar-fill{background:var(--orange)}.store-m .store-bar-fill{background:var(--blue)}
-.store-nums{display:flex;gap:16px;font-size:.85rem;color:var(--muted);min-width:160px}.store-nums strong{color:var(--text)}
-.notes-feed{display:flex;flex-direction:column;gap:10px}
-.note{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
-.note-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.note-store{font-weight:800;font-size:.85rem}.note-shift{font-size:.75rem;color:var(--muted)}
-.note-body{font-size:.9rem;color:#c0c5cf}.note-time{font-size:.75rem;color:var(--muted);margin-top:4px}
-.form-group{margin-bottom:14px}
-label{display:block;margin-bottom:6px;color:var(--muted);font-size:.85rem;font-weight:600}
-input,select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--text);font:inherit;font-size:.95rem}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.15)}
-textarea{min-height:80px;resize:vertical}
-.checklist{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-.check-item{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;cursor:pointer}
-.check-item input[type=checkbox]{width:auto;margin-top:2px;accent-color:var(--orange)}
-.check-item span{flex:1;font-size:.9rem;line-height:1.4}
-.check-item.done span{text-decoration:line-through;color:var(--muted)}
-.btn-row{display:flex;gap:10px;margin-top:16px}
-.btn{padding:12px 20px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;font-weight:700;font-size:.95rem}
-.btn.primary{background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;color:#fff}
-.btn.full{width:100%;text-align:center}
-canvas{max-height:260px}
-@media(max-width:900px){.summary-2col,.portal-2col{grid-template-columns:1fr}.hero-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:600px){.hero-grid{grid-template-columns:1fr 1fr}}
+    :root {
+      --bg:#0b1220;
+      --panel:#111827;
+      --panel2:#0f172a;
+      --border:#243041;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --orange:#f97316;
+      --orange2:#fb923c;
+      --green:#22c55e;
+      --red:#ef4444;
+      --blue:#38bdf8;
+      --yellow:#facc15;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,#08101d 0%,#0b1220 100%);color:var(--text);min-height:100vh}
+    .app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+    .sidebar{background:rgba(15,23,42,.96);border-right:1px solid var(--border);padding:24px 18px;position:sticky;top:0;height:100vh}
+    .brand{margin-bottom:24px}
+    .brand h1{font-size:1.8rem;font-weight:900;background:linear-gradient(90deg,var(--orange),var(--orange2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .brand p{color:var(--muted);font-size:.9rem;margin-top:6px}
+    .nav{display:flex;flex-direction:column;gap:8px}
+    .nav button{background:transparent;border:1px solid transparent;color:var(--text);text-align:left;padding:12px 14px;border-radius:12px;cursor:pointer;font-weight:700;font-size:.95rem}
+    .nav button:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.05)}
+    .nav button.active{background:linear-gradient(90deg,rgba(249,115,22,.16),rgba(251,146,60,.12));border-color:rgba(249,115,22,.22);color:#fff}
+    .sidebar-foot{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:.82rem;line-height:1.5}
+    .main{padding:24px}
+    .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+    .title h2{font-size:2rem;font-weight:900}
+    .title p{color:var(--muted);margin-top:6px}
+    .status{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{padding:8px 12px;border-radius:999px;font-size:.78rem;font-weight:800;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04)}
+    .chip.good{color:var(--green);background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.2)}
+    .chip.warn{color:var(--yellow);background:rgba(250,204,21,.1);border-color:rgba(250,204,21,.2)}
+    .grid{display:grid;gap:16px;margin-bottom:16px}
+    .kpi-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+    .two-col{grid-template-columns:1.5fr 1fr}
+    .three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:rgba(17,24,39,.92);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 12px 28px rgba(0,0,0,.22)}
+    .eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800;margin-bottom:8px}
+    .metric{font-size:1.9rem;font-weight:900;margin-bottom:4px}
+    .small{font-size:.87rem;color:var(--muted)}
+    .progress{height:7px;background:#182133;border-radius:999px;overflow:hidden;margin-top:10px}
+    .progress>div{height:100%;background:linear-gradient(90deg,var(--orange),var(--orange2))}
+    .section-title{font-size:1.05rem;font-weight:900;margin-bottom:14px}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .item{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+    .item .meta{font-size:.78rem;color:var(--muted);margin-top:4px}
+    .split{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+    .store-row{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .store-row:last-child{border-bottom:none}
+    .store-name{min-width:90px;font-weight:800}
+    .store-bars{flex:1}
+    .bar{height:8px;background:#182133;border-radius:999px;overflow:hidden;margin-bottom:6px}
+    .bar>div{height:100%}
+    .w{background:var(--orange)}
+    .m{background:var(--blue)}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left}
+    th{font-size:.75rem;text-transform:uppercase;color:var(--muted)}
+    .hidden{display:none}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.76rem;font-weight:800}
+    .pill.good{background:rgba(34,197,94,.14);color:var(--green)}
+    .pill.bad{background:rgba(239,68,68,.14);color:var(--red)}
+    .pill.blue{background:rgba(56,189,248,.14);color:var(--blue)}
+    .pill.warn{background:rgba(250,204,21,.12);color:var(--yellow)}
+    .form-group{margin-bottom:12px}
+    label{display:block;margin-bottom:6px;color:var(--muted);font-size:.84rem}
+    input,select,textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--text);font:inherit}
+    textarea{min-height:90px;resize:vertical}
+    .btn-row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:11px 16px;border:none;border-radius:10px;background:rgba(255,255,255,.05);color:var(--text);font-weight:800;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--orange),var(--orange2));color:#fff}
+    .checklist{display:grid;gap:8px}
+    .check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+    .check-item input{width:auto;margin-top:2px}
+    canvas{max-height:320px!important}
+    @media(max-width:1450px){.kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.three-col,.two-col{grid-template-columns:1fr}}
+    @media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:680px){.kpi-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-
-<div id="screen-landing" class="screen active">
-  <div class="landing">
-    <h1>Tankk Dashboard</h1>
-    <p>Winthrop & Melville</p>
-    <div class="landing-btns">
-      <button class="btn-land owner" onclick="showScreen('owner')">Owner Dashboard</button>
-      <button class="btn-land staff" onclick="showScreen('staff')">Staff Portal</button>
-    </div>
-  </div>
-</div>
-<div id="screen-owner" class="screen">
-  <div class="topbar">
-    <button class="back-btn" onclick="showScreen('landing')">Back</button>
-    <h2>Owner Dashboard</h2>
-    <span class="live">LIVE</span>
-  </div>
-  <div class="container">
-    <div class="hero-grid" id="owner-kpis"></div>
-    <div class="summary-2col">
-      <div class="card"><div class="eyebrow">Daily Sales - This Week</div><canvas id="salesChart"></canvas></div>
-      <div class="card"><div class="eyebrow">Alerts & Issues</div><div class="alert-list" id="alerts"></div></div>
-    </div>
-    <div class="card" style="margin-bottom:20px"><div class="eyebrow">Store Performance vs Targets</div><div id="store-rows"></div></div>
-    <div class="card"><div class="eyebrow">Staff Notes / Handovers</div><div class="notes-feed" id="notes-feed"></div></div>
-  </div>
-</div>
-<div id="screen-staff" class="screen">
-  <div class="topbar">
-    <button class="back-btn" onclick="showScreen('landing')">Back</button>
-    <h2>Staff Portal</h2>
-  </div>
-  <div class="container">
-    <div class="portal-2col">
-      <div class="card">
-        <div class="eyebrow">Shift Setup</div>
-        <div class="form-group"><label>Store</label><select id="staffStore"><option value="winthrop">Winthrop</option><option value="melville">Melville</option></select></div>
-        <div class="form-group"><label>Your Name</label><input id="staffName" placeholder="Enter your name" /></div>
-        <div class="form-group"><label>Shift Type</label><select id="staffShiftType" onchange="onShiftTypeChange()"><option value="open">Open Shift</option><option value="close">Close Shift</option><option value="stocktake">Stock Take</option><option value="adjustment">Stock Adjustment</option></select></div>
-        <div class="form-group"><label>Handover Notes</label><textarea id="staffNotes" placeholder="Problems, shortages, feedback..."></textarea></div>
-        <button class="btn primary full" onclick="startShift()">Start Shift</button>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>Tankk OS</h1>
+        <p>Sales. Marketing. Ops. Automations.</p>
       </div>
-      <div class="card">
-        <div class="eyebrow" id="portal-eyebrow">Select shift type and start</div>
-        <div id="portal-body"><p style="color:var(--muted);font-size:.9rem;margin-top:8px">Choose your shift type on the left, enter your name, then click Start Shift.</p></div>
+      <nav class="nav">
+        <button class="active" data-screen="command">Command Centre</button>
+        <button data-screen="sales">Sales</button>
+        <button data-screen="marketing">Marketing</button>
+        <button data-screen="ops">Operations</button>
+        <button data-screen="staff">Staff Portal</button>
+        <button data-screen="automations">Automations</button>
+        <button data-screen="admin">Admin</button>
+      </nav>
+      <div class="sidebar-foot">
+        Weekly targets:<br>
+        Winthrop $15k<br>
+        Melville $13.5k<br>
+        Network $28.5k
       </div>
-    </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="title">
+          <h2 id="screenTitle">Command Centre</h2>
+          <p id="screenSub">Owner control panel for running Tankk week to week.</p>
+        </div>
+        <div class="status">
+          <span class="chip good">Sales sync: ready</span>
+          <span class="chip warn">Latest week missing backfill</span>
+          <span class="chip">Last data: 29 Mar</span>
+        </div>
+      </div>
+
+      <section id="screen-command" class="screen">
+        <div class="grid kpi-grid">
+          <div class="card"><div class="eyebrow">Weekly Sales</div><div class="metric" id="ccSales">$24,371</div><div class="small">Combined this week</div></div>
+          <div class="card"><div class="eyebrow">Achievement</div><div class="metric" id="ccAch">85%</div><div class="small">Of $28,500 target</div><div class="progress"><div id="ccAchBar" style="width:85%"></div></div></div>
+          <div class="card"><div class="eyebrow">Gap</div><div class="metric" id="ccGap">$4,129</div><div class="small">Still needed this week</div></div>
+          <div class="card"><div class="eyebrow">Customers</div><div class="metric" id="ccCustomers">830</div><div class="small">Kounta customers</div></div>
+          <div class="card"><div class="eyebrow">Uber Mix</div><div class="metric" id="ccUberMix">21%</div><div class="small">Revenue from Uber Eats</div></div>
+          <div class="card"><div class="eyebrow">AOV</div><div class="metric" id="ccAov">$29.36</div><div class="small">Combined weekly revenue / customers</div></div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <div class="section-title">Priority Board</div>
+            <div class="list" id="priorityBoard"></div>
+          </div>
+          <div class="card">
+            <div class="section-title">Store Pace</div>
+            <div id="storePace"></div>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <div class="section-title">Sales Trend</div>
+            <canvas id="commandSalesChart"></canvas>
+          </div>
+          <div class="card">
+            <div class="section-title">Latest Handovers</div>
+            <div class="list" id="handoverFeed"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-sales" class="screen hidden">
+        <div class="grid kpi-grid">
+          <div class="card"><div class="eyebrow">Winthrop Week</div><div class="metric">$12,851</div><div class="small">85% of target</div></div>
+          <div class="card"><div class="eyebrow">Melville Week</div><div class="metric">$11,520</div><div class="small">85% of target</div></div>
+          <div class="card"><div class="eyebrow">Kounta Revenue</div><div class="metric">$19,150</div><div class="small">Combined</div></div>
+          <div class="card"><div class="eyebrow">Uber Revenue</div><div class="metric">$5,221</div><div class="small">265 orders</div></div>
+          <div class="card"><div class="eyebrow">Target Gap</div><div class="metric">-$4,129</div><div class="small">Need pace lift</div></div>
+          <div class="card"><div class="eyebrow">Data Status</div><div class="metric">Backfill</div><div class="small">Mar 30-Apr 6 missing</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="section-title">Daily Sales by Store</div><canvas id="salesDetailChart"></canvas></div>
+          <div class="card"><div class="section-title">Commercial Readout</div><div class="list" id="salesReadout"></div></div>
+        </div>
+        <div class="card">
+          <div class="section-title">Daily Table</div>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Winthrop</th><th>Melville</th><th>Total</th><th>Notes</th></tr></thead><tbody id="salesTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="screen-marketing" class="screen hidden">
+        <div class="grid three-col">
+          <div class="card"><div class="section-title">Current Special</div><div class="metric">Battered Fetta</div><div class="small">April feature item</div></div>
+          <div class="card"><div class="section-title">Weekly Ad Budget</div><div class="metric">$150</div><div class="small">Scale only if ROI works</div></div>
+          <div class="card"><div class="section-title">Best Posting Window</div><div class="metric">11am–12:30pm</div><div class="small">Planner audience, not impulse</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="section-title">Marketing Actions</div><div class="list" id="marketingActions"></div></div>
+          <div class="card"><div class="section-title">Calendar / Campaign Queue</div><div class="list" id="campaignQueue"></div></div>
+        </div>
+      </section>
+
+      <section id="screen-ops" class="screen hidden">
+        <div class="grid three-col">
+          <div class="card"><div class="section-title">Checklist Compliance</div><div class="metric">—</div><div class="small">Needs backend wiring</div></div>
+          <div class="card"><div class="section-title">Stock Variances</div><div class="metric">1 flagged</div><div class="small">Chicken fillet variance sample</div></div>
+          <div class="card"><div class="section-title">Open Issues</div><div class="metric">3</div><div class="small">Across both stores</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="section-title">Ops Alerts</div><div class="list" id="opsAlerts"></div></div>
+          <div class="card"><div class="section-title">Recurring Misses / Notes</div><div class="list" id="opsNotes"></div></div>
+        </div>
+      </section>
+
+      <section id="screen-staff" class="screen hidden">
+        <div class="grid two-col">
+          <div class="card">
+            <div class="section-title">Staff Portal</div>
+            <div class="form-group"><label>Store</label><select id="staffStore"><option value="winthrop">Winthrop</option><option value="melville">Melville</option></select></div>
+            <div class="form-group"><label>Name</label><input id="staffName" placeholder="Enter your name" /></div>
+            <div class="form-group"><label>Shift Type</label><select id="staffShiftType"><option value="open">Open</option><option value="close">Close</option><option value="stocktake">Stock Take</option><option value="adjustment">Stock Adjustment</option></select></div>
+            <div class="form-group"><label>Handover Notes</label><textarea id="staffNotes" placeholder="What happened this shift?"></textarea></div>
+            <div class="btn-row"><button class="btn primary" onclick="loadStaffForm()">Load Form</button><button class="btn" onclick="resetStaffForm()">Reset</button></div>
+          </div>
+          <div class="card">
+            <div class="section-title">Submission Form</div>
+            <div id="staffFormBody"><div class="small">Choose shift type and load the form.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-automations" class="screen hidden">
+        <div class="grid three-col">
+          <div class="card"><div class="section-title">Nightly Sales Sync</div><div class="metric">Active</div><div class="small">Needs surface in cron/job status</div></div>
+          <div class="card"><div class="section-title">Weekly Sales Brief</div><div class="metric">Monday 6 AM</div><div class="small">Already conceptually built</div></div>
+          <div class="card"><div class="section-title">Checklist Alerts</div><div class="metric">Planned</div><div class="small">Wire after backend is real</div></div>
+        </div>
+        <div class="card"><div class="section-title">Automation Queue</div><div class="table-wrap"><table><thead><tr><th>Job</th><th>Status</th><th>Last Run</th><th>Next Run</th><th>Owner Impact</th></tr></thead><tbody id="automationTable"></tbody></table></div></div>
+      </section>
+
+      <section id="screen-admin" class="screen hidden">
+        <div class="grid three-col">
+          <div class="card"><div class="section-title">Primary Model</div><div class="metric">Sonnet 4.6</div><div class="small">Fallbacks removed</div></div>
+          <div class="card"><div class="section-title">Data Freshness</div><div class="metric">29 Mar</div><div class="small">Need Apr 6 backfill</div></div>
+          <div class="card"><div class="section-title">Frontend</div><div class="metric">GitHub Pages</div><div class="small">Live deployment</div></div>
+        </div>
+        <div class="card"><div class="section-title">Admin Notes</div><div class="list" id="adminNotes"></div></div>
+      </section>
+    </main>
   </div>
-</div>
 
-<script>
+  <script>
+    const weekly = {
+      combined: { revenue: 24370.75, target: 28500, customers: 830, uber: 5220.75 },
+      winthrop: { revenue: 12850.50, target: 15000 },
+      melville: { revenue: 11520.25, target: 13500 }
+    };
 
-var TARGETS = { winthrop: 15000, melville: 13500, all: 28500 };
-var salesWeek = { winthrop: { kounta: 10200, uber: 2650, total: 12850, customers: 445 }, melville: { kounta: 8950, uber: 2570, total: 11520, customers: 385 }};
-var dailySales = [
-  { date:"Mon 23", winthrop:1350, melville:1130 },
-  { date:"Tue 24", winthrop:2371, melville:2001 },
-  { date:"Wed 25", winthrop:2060, melville:1761 },
-  { date:"Thu 26", winthrop:2340, melville:2136 },
-  { date:"Fri 27", winthrop:2550, melville:2275 },
-  { date:"Sat 28", winthrop:2971, melville:2580 },
-  { date:"Sun 29", winthrop:3380, melville:2991 },
-];
-var alerts = [
-  { type:"yellow", text:"Melville close - 1 incomplete submission Mon night", time:"2 days ago" },
-  { type:"red", text:"Stock variance: Chicken fillet - expected 40, counted 28", time:"3 days ago" },
-  { type:"green", text:"Both stores completed Easter special setup on time", time:"4 days ago" },
-];
-var recentNotes = [
-  { store:"Winthrop", shift:"Close", name:"Jake", body:"Fish count done. Battery low on tablet 2.", time:"Yesterday 8:45 PM" },
-  { store:"Melville", shift:"Open", name:"Sarah", body:"Fryer temp fine. Ran out of lemons - ordered more.", time:"Yesterday 4:20 PM" },
-  { store:"Winthrop", shift:"Close", name:"Mike", body:"UE wrong orders - customer refunded.", time:"2 days ago" },
-];
-var CHECKLISTS = {
-  winthrop:{
-    open:["Bring out flag","Set up tables/chairs","Turn on power / lights / fume hood","Turn on fryers and grill at 4:00pm","Set up fish fridge","Check dates in fridges","Set up taco fridge","Ensure tablets online","Test phone","Feed fish","Cut lemons","Make batter","Open at 4:30pm","Test fryer temperatures"],
-    close:["Text Paul rundown","Fish count for next day","Lock front door","Turn off fryers and grill","Check fridges/freezers shut","Cash count and takings","POS back to home page","Drain dishwasher","Check Bopple backend","Text Paul photos for hake & salads","Phone on charge","Alarm on","Lock back door and return key"],
-  },
-  melville:{
-    open:["Set up tables/chairs","Turn on lights","Turn on fryers and grill at 4:00pm","Set up fish fridge","Check dates in fridges","Set up taco fridge","Ensure tablets online","Test phone","Cut lemons","Make batter","Open at 4:30pm","Test fryer temperatures"],
-    close:["Text Paul rundown","Fish count for next day","Lock front door","Turn off fryers and grill","Check fridges/freezers shut","Cash count and takings","POS back to home page","Drain dishwasher","Check Bopple backend","Text Paul photos for hake & salads","Phone on charge","Alarm on","Lock back door and return key"],
-  },
-};
-var salesChart = null;
-function showScreen(name) {
-  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
-  document.getElementById("screen-" + name).classList.add("active");
-  if (name === "owner") renderOwner();
-  if (name === "staff") resetStaff();
-}
-function renderOwner() {
-  var combined = salesWeek.winthrop.total + salesWeek.melville.total;
-  var target = TARGETS.all;
-  var ach = Math.round((combined / target) * 100);
-  var gap = target - combined;
-  var aov = Math.round(combined / (salesWeek.winthrop.customers + salesWeek.melville.customers));
-  var uberMix = Math.round(((salesWeek.winthrop.uber + salesWeek.melville.uber) / combined) * 100);
-  var wAch = Math.round((salesWeek.winthrop.total / TARGETS.winthrop) * 100);
-  var mAch = Math.round((salesWeek.melville.total / TARGETS.melville) * 100);
-  function kpi(label, value, sub, pct) {
-    return '<div class="card"><div class="eyebrow">' + label + '</div><div class="metric">' + value + '</div><div class="small">' + sub + '</div>' + (pct !== undefined ? '<div class="progress"><div style="width:' + Math.min(pct,100) + '%"></div></div>' : '') + '</div>';
-  }
-  document.getElementById("owner-kpis").innerHTML =
-    kpi("Weekly Sales", "$" + combined.toLocaleString(), "Combined this week") +
-    kpi("Achievement", ach + "%", "of $28,500 target", ach) +
-    kpi("Weekly Gap", "$" + gap.toLocaleString(), ach >= 100 ? "On target" : "Below target", ach) +
-    kpi("AOV", "$" + aov, "Per customer") +
-    kpi("Uber Mix", uberMix + "%", "of weekly revenue") +
-    kpi("Customers", (salesWeek.winthrop.customers + salesWeek.melville.customers).toLocaleString(), "This week");
-  renderSalesChart();
-  renderAlerts();
-  renderStoreRows(wAch, mAch);
-  renderNotes();
-}
-function renderSalesChart() {
-  var ctx = document.getElementById("salesChart").getContext("2d");
-  if (salesChart) salesChart.destroy();
-  salesChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: dailySales.map(function(d){ return d.date; }),
-      datasets: [
-        { label: "Winthrop", data: dailySales.map(function(d){ return d.winthrop; }), backgroundColor: "rgba(249,115,22,0.8)", borderRadius: 4 },
-        { label: "Melville", data: dailySales.map(function(d){ return d.melville; }), backgroundColor: "rgba(56,189,248,0.8)", borderRadius: 4 },
-      ]
-    },
-    options: { responsive: true, plugins: { legend: { labels: { color: "#94a3b8" } } }, scales: { x: { ticks: { color: "#94a3b8" }, grid: { display: false } }, y: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(255,255,255,0.05)" } } } }
-  });
-}
-function renderAlerts() {
-  var el = document.getElementById("alerts");
-  if (!alerts || alerts.length === 0) { el.innerHTML = '<p style="color:var(--muted);font-size:.9rem">No alerts. All good.</p>'; return; }
-  el.innerHTML = alerts.map(function(a) {
-    return '<div class="alert alert-' + a.type + '">' + a.text + '<div class="alert-meta">' + a.time + '</div></div>';
-  }).join('');
-}
-function renderStoreRows(wAch, mAch) {
-  var el = document.getElementById("store-rows");
-  function storeRow(name, cls, total, target, ach) {
-    var pct = Math.round((total / target) * 100);
-    return '<div class="store-row ' + cls + '">' +
-      '<div class="store-name">' + name + '</div>' +
-      '<div class="store-bars">' +
-        '<div class="store-bar"><div class="store-bar-fill" style="width:' + Math.min(pct,100) + '%"></div></div>' +
-        '<div style="font-size:.75rem;color:var(--muted)">$' + total.toLocaleString() + ' / $' + target.toLocaleString() + '   ' + ach + '%</div>' +
-      '</div>' +
-    '</div>';
-  }
-  el.innerHTML = storeRow("Winthrop", "store-w", salesWeek.winthrop.total, TARGETS.winthrop, wAch) +
-                 storeRow("Melville", "store-m", salesWeek.melville.total, TARGETS.melville, mAch);
-}
-function renderNotes() {
-  var el = document.getElementById("notes-feed");
-  if (!recentNotes || recentNotes.length === 0) { el.innerHTML = '<p style="color:var(--muted);font-size:.9rem">No notes yet.</p>'; return; }
-  el.innerHTML = recentNotes.map(function(n) {
-    return '<div class="note">' +
-      '<div class="note-header">' +
-        '<span class="note-store">' + n.store + '</span>' +
-        '<span class="note-shift tag warn">' + n.shift + '</span>' +
-      '</div>' +
-      '<div class="note-body">' + n.name + ': ' + n.body + '</div>' +
-      '<div class="note-time">' + n.time + '</div>' +
-    '</div>';
-  }).join('');
-}
-function onShiftTypeChange() {
-  var t = document.getElementById("staffShiftType").value;
-  if (t === "stocktake") {
-    document.getElementById("portal-eyebrow").textContent = "Stock Take";
-    document.getElementById("portal-body").innerHTML = '<div class="form-group"><label>Item name</label><input id="stockItem" placeholder="e.g. Chicken fillet" /></div><div class="form-group"><label>Expected qty</label><input id="stockExpected" type="number" placeholder="Expected" /></div><div class="form-group"><label>Counted qty</label><input id="stockCounted" type="number" placeholder="Counted" /></div><div class="form-group"><label>Notes</label><textarea id="stockNotes" placeholder="Variance reason..."></textarea></div><button class="btn primary full" onclick="submitStockTake()">Submit Stock Take</button>';
-  } else if (t === "adjustment") {
-    document.getElementById("portal-eyebrow").textContent = "Stock Adjustment";
-    document.getElementById("portal-body").innerHTML = '<div class="form-group"><label>Item name</label><input id="adjItem" placeholder="e.g. Chicken fillet" /></div><div class="form-group"><label>Adjustment qty (+/-)</label><input id="adjQty" type="number" placeholder="+ or -" /></div><div class="form-group"><label>Reason</label><select id="adjReason"><option>wastage</option><option>spoilage</option><option>damaged</option><option>wrong count</option><option>transfer</option><option>manager adjustment</option></select></div><div class="form-group"><label>Notes</label><textarea id="adjNotes" placeholder="Reason..."></textarea></div><button class="btn primary full" onclick="submitAdjustment()">Submit Adjustment</button>';
-  } else {
-    document.getElementById("portal-eyebrow").textContent = "Select shift type and start";
-    document.getElementById("portal-body").innerHTML = '<p style="color:var(--muted);font-size:.9rem;margin-top:8px">Choose your shift type on the left, enter your name, then click Start Shift.</p>';
-  }
-}
-function resetStaff() {
-  document.getElementById("staffName").value = "";
-  document.getElementById("staffNotes").value = "";
-  document.getElementById("staffShiftType").value = "open";
-  document.getElementById("staffStore").value = "winthrop";
-  document.getElementById("portal-eyebrow").textContent = "Select shift type and start";
-  document.getElementById("portal-body").innerHTML = '<p style="color:var(--muted);font-size:.9rem;margin-top:8px">Choose your shift type on the left, enter your name, then click Start Shift.</p>';
-}
-function startShift() {
-  var name = document.getElementById("staffName").value.trim();
-  if (!name) { alert("Please enter your name first."); return; }
-  var store = document.getElementById("staffStore").value;
-  var shift = document.getElementById("staffShiftType").value;
-  var notes = document.getElementById("staffNotes").value.trim();
-  var list = CHECKLISTS[store][shift];
-  if (!list) return;
-  document.getElementById("portal-eyebrow").textContent = (shift === "open" ? "Open" : "Close") + " Checklist - " + store;
-  var html = '<div class="checklist">' + list.map(function(item, i) {
-    return '<label class="check-item" onclick="this.classList.toggle(\'done\')"><input type="checkbox" /> <span>' + item + '</span></label>';
-  }).join('') + '</div>';
-  html += '<div class="form-group" style="margin-top:14px"><label>Notes</label><textarea id="shiftNotes" placeholder="Add any notes...">' + (notes || '') + '</textarea></div>';
-  html += '<div class="btn-row"><button class="btn primary" onclick="submitShift()">Submit & Done</button></div>';
-  document.getElementById("portal-body").innerHTML = html;
-}
-function submitShift() {
-  var store = document.getElementById("staffStore").value;
-  var name = document.getElementById("staffName").value.trim();
-  var shift = document.getElementById("staffShiftType").value;
-  var checks = document.querySelectorAll("#portal-body input[type=checkbox]");
-  var completed = 0;
-  checks.forEach(function(c){ if(c.checked) completed++; });
-  var total = checks.length;
-  var pct = Math.round((completed / total) * 100);
-  var notes = (document.getElementById("shiftNotes") || {}).value || "";
-  var sub = { staff: name, store: store, shift: shift, completed: completed, total: total, pct: pct, notes: notes, time: new Date().toISOString() };
-  console.log("SHIFT SUBMITTED:", JSON.stringify(sub));
-  localStorage.setItem("tankk_last_submission", JSON.stringify(sub));
-  alert("Submitted! " + pct + "% complete (" + completed + "/" + total + "). Thank you!");
-  resetStaff();
-}
-function submitStockTake() {
-  var item = document.getElementById("stockItem").value.trim();
-  var expected = document.getElementById("stockExpected").value;
-  var counted = document.getElementById("stockCounted").value;
-  var notes = document.getElementById("stockNotes").value.trim();
-  if (!item || !expected || !counted) { alert("Please fill all fields."); return; }
-  var sub = { type: "stocktake", staff: document.getElementById("staffName").value.trim() || "Unknown", store: document.getElementById("staffStore").value, item: item, expected: expected, counted: counted, notes: notes, time: new Date().toISOString() };
-  console.log("STOCK TAKE:", JSON.stringify(sub));
-  localStorage.setItem("tankk_last_submission", JSON.stringify(sub));
-  alert("Stock take submitted! " + counted + "/" + expected + " counted.");
-  resetStaff();
-}
-function submitAdjustment() {
-  var item = document.getElementById("adjItem").value.trim();
-  var qty = document.getElementById("adjQty").value;
-  var reason = document.getElementById("adjReason").value;
-  var notes = document.getElementById("adjNotes").value.trim();
-  if (!item || !qty) { alert("Please fill all fields."); return; }
-  var sub = { type: "adjustment", staff: document.getElementById("staffName").value.trim() || "Unknown", store: document.getElementById("staffStore").value, item: item, qty: qty, reason: reason, notes: notes, time: new Date().toISOString() };
-  console.log("STOCK ADJUSTMENT:", JSON.stringify(sub));
-  localStorage.setItem("tankk_last_submission", JSON.stringify(sub));
-  alert("Adjustment submitted! " + qty + " units - " + reason + ".");
-  resetStaff();
-}
+    const daily = [
+      { date:'Mar 23', winthrop:1350.5, melville:1130.25, notes:'Slow Sunday baseline' },
+      { date:'Mar 24', winthrop:2370.75, melville:2000.75, notes:'Good Tuesday lift' },
+      { date:'Mar 25', winthrop:2060.4, melville:1760.6, notes:'Midweek steady' },
+      { date:'Mar 26', winthrop:2340.25, melville:2135.75, notes:'Healthy pace' },
+      { date:'Mar 27', winthrop:2550.35, melville:2275.4, notes:'Friday building' },
+      { date:'Mar 28', winthrop:2970.6, melville:2580.25, notes:'Saturday strong' },
+      { date:'Mar 29', winthrop:3380.15, melville:2990.85, notes:'Sunday peak' },
+    ];
 
-</script>
+    const priorities = [
+      { text:'Backfill Mar 30 - Apr 6 sales immediately so owner view is current.', meta:'Highest priority' },
+      { text:'Replace checklist-first layout with full owner operating system.', meta:'In progress now' },
+      { text:'Wire persistent submissions backend so ops issues show up centrally.', meta:'Backend required' },
+      { text:'Expose cron jobs visibly: sales sync, weekly brief, marketing prompts.', meta:'Automation panel' },
+    ];
+
+    const handovers = [
+      { text:'Winthrop close: fish count done, tablet 2 battery low.', meta:'Jake · Yesterday 8:45 PM' },
+      { text:'Melville open: fryer temp fine, lemons low, more ordered.', meta:'Sarah · Yesterday 4:20 PM' },
+      { text:'Winthrop close: UE wrong orders issue, customer refunded.', meta:'Mike · 2 days ago' },
+    ];
+
+    const marketingActions = [
+      { text:'Build April-June marketing panel from existing social calendar and special items plan.', meta:'Battered Fetta → Calamari → Barramundi' },
+      { text:'Show weekly posting queue with approval-needed flag before anything public.', meta:'No posting without Paul sign-off' },
+      { text:'Track ad spend, promo ROI, retention tasks, and upcoming local dates.', meta:'Mother’s Day / school holidays / etc.' },
+    ];
+
+    const campaignQueue = [
+      { text:'April special: Battered Fetta', meta:'Current feature' },
+      { text:'Best posting slot: 11am–12:30pm', meta:'Source: planner audience insight' },
+      { text:'Ad budget baseline: $150/week', meta:'Scale if ROI works' },
+    ];
+
+    const opsAlerts = [
+      { text:'Melville close had an incomplete submission sample in prototype data.', meta:'Needs real backend alerting' },
+      { text:'Chicken fillet variance flagged in stock sample.', meta:'Expected 40, counted 28' },
+      { text:'Need unresolved issues feed, not just one-off notes.', meta:'Ops module rebuild' },
+    ];
+
+    const opsNotes = [
+      { text:'Open/close misses should roll up by store and by task.', meta:'E.g. fish count, lockup, photos, dishwasher' },
+      { text:'Maintenance / issue log should sit here too.', meta:'Not buried in handovers' },
+    ];
+
+    const automationRows = [
+      ['Nightly sales sync','planned/live hybrid','9:00 PM','Tonight 9:00 PM','Updates sales snapshots'],
+      ['Weekly sales brief','active concept','Mon 6:00 AM','Next Monday 6:00 AM','Owner weekly summary'],
+      ['Checklist miss alert','planned','—','After backend','Flags incomplete shifts'],
+      ['Marketing prompt','planned','—','Weekly','Tells owner what needs posting'],
+    ];
+
+    const adminNotes = [
+      { text:'Model locked to Sonnet 4.6 only. No silent fallback.', meta:'Config updated today' },
+      { text:'GitHub Pages is live, but frontend needs rebuild around Tankk OS.', meta:'This file is the new direction' },
+      { text:'Need one clean backend for submissions + automation status.', meta:'Don’t scatter data' },
+    ];
+
+    const checklists = {
+      winthrop: {
+        open:['Bring out flag','Set up tables/chairs','Turn on power / lights / fume hood','Turn on fryers and grill at 4:00pm','Set up fish fridge','Check dates in fridges','Set up taco fridge','Ensure tablets online','Test phone','Feed fish','Cut lemons','Make batter','Open at 4:30pm','Test fryer temperatures'],
+        close:['Text Paul rundown','Fish count for next day','Lock front door','Turn off fryers and grill','Check fridges/freezers shut','Cash count and takings','POS back to home page','Drain dishwasher','Check Bopple backend','Text Paul photos for hake & salads','Phone on charge','Alarm on','Lock back door and return key']
+      },
+      melville: {
+        open:['Set up tables/chairs','Turn on lights','Turn on fryers and grill at 4:00pm','Set up fish fridge','Check dates in fridges','Set up taco fridge','Ensure tablets online','Test phone','Cut lemons','Make batter','Open at 4:30pm','Test fryer temperatures'],
+        close:['Text Paul rundown','Fish count for next day','Lock front door','Turn off fryers and grill','Check fridges/freezers shut','Cash count and takings','POS back to home page','Drain dishwasher','Check Bopple backend','Text Paul photos for hake & salads','Phone on charge','Alarm on','Lock back door and return key']
+      }
+    };
+
+    const navButtons = Array.from(document.querySelectorAll('.nav button'));
+    const screens = Array.from(document.querySelectorAll('.screen'));
+    navButtons.forEach(btn => btn.addEventListener('click', () => showScreen(btn.dataset.screen)));
+
+    function showScreen(name){
+      navButtons.forEach(b => b.classList.toggle('active', b.dataset.screen === name));
+      screens.forEach(s => s.classList.toggle('hidden', s.id !== 'screen-' + name));
+      const titles = {
+        command:['Command Centre','Owner control panel for running Tankk week to week.'],
+        sales:['Sales','Revenue, targets, pacing, channels, and trend.'],
+        marketing:['Marketing','Specials, content, ads, and retention actions.'],
+        ops:['Operations','Checklist misses, stock issues, and handovers.'],
+        staff:['Staff Portal','Simple forms for shifts, stock, and notes.'],
+        automations:['Automations','Cron jobs, alerts, and scheduled owner outputs.'],
+        admin:['Admin','Targets, data health, config, and system status.']
+      };
+      document.getElementById('screenTitle').textContent = titles[name][0];
+      document.getElementById('screenSub').textContent = titles[name][1];
+    }
+
+    function money(v){ return '$' + Number(v).toLocaleString(undefined,{maximumFractionDigits:0}); }
+    function renderLists(){
+      document.getElementById('priorityBoard').innerHTML = priorities.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('handoverFeed').innerHTML = handovers.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('marketingActions').innerHTML = marketingActions.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('campaignQueue').innerHTML = campaignQueue.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('opsAlerts').innerHTML = opsAlerts.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('opsNotes').innerHTML = opsNotes.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('adminNotes').innerHTML = adminNotes.map(x => `<div class="item"><div>${x.text}</div><div class="meta">${x.meta}</div></div>`).join('');
+      document.getElementById('automationTable').innerHTML = automationRows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+      document.getElementById('salesReadout').innerHTML = [
+        'Network did $24,370.75 for the week — 85% of target.',
+        'Both stores are sitting at 85% of their weekly target.',
+        'Uber contributed $5,220.75 across 265 orders.',
+        'Missing Mar 30-Apr 6 data is the first thing to fix.'
+      ].map(x => `<div class="item">${x}</div>`).join('');
+      document.getElementById('salesTable').innerHTML = daily.map(d => `<tr><td>${d.date}</td><td>${money(d.winthrop)}</td><td>${money(d.melville)}</td><td>${money(d.winthrop+d.melville)}</td><td>${d.notes}</td></tr>`).join('');
+    }
+
+    function renderStorePace(){
+      const stores = [
+        {name:'Winthrop', revenue:weekly.winthrop.revenue, target:weekly.winthrop.target, cls:'w'},
+        {name:'Melville', revenue:weekly.melville.revenue, target:weekly.melville.target, cls:'m'},
+      ];
+      document.getElementById('storePace').innerHTML = stores.map(s => {
+        const pct = Math.round((s.revenue / s.target) * 100);
+        return `<div class="store-row"><div class="store-name">${s.name}</div><div class="store-bars"><div class="bar"><div class="${s.cls}" style="width:${Math.min(pct,100)}%"></div></div><div class="small">${money(s.revenue)} / ${money(s.target)} · ${pct}%</div></div></div>`;
+      }).join('');
+    }
+
+    let commandChart, salesDetailChart;
+    function renderCharts(){
+      const labels = daily.map(d => d.date);
+      const totals = daily.map(d => d.winthrop + d.melville);
+      const w = daily.map(d => d.winthrop);
+      const m = daily.map(d => d.melville);
+      const pace = labels.map(() => weekly.combined.target / 7);
+
+      const ctx1 = document.getElementById('commandSalesChart').getContext('2d');
+      if(commandChart) commandChart.destroy();
+      commandChart = new Chart(ctx1,{type:'line',data:{labels,datasets:[
+        {label:'Network Sales',data:totals,borderColor:'#f97316',backgroundColor:'rgba(249,115,22,.14)',fill:true,tension:.35},
+        {label:'Target Pace',data:pace,borderColor:'rgba(148,163,184,.8)',borderDash:[6,6],pointRadius:0,fill:false}
+      ]},options:{responsive:true,plugins:{legend:{labels:{color:'#cbd5e1'}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{display:false}},y:{ticks:{color:'#94a3b8'},grid:{color:'rgba(255,255,255,.06)'}}}}});
+
+      const ctx2 = document.getElementById('salesDetailChart').getContext('2d');
+      if(salesDetailChart) salesDetailChart.destroy();
+      salesDetailChart = new Chart(ctx2,{type:'bar',data:{labels,datasets:[
+        {label:'Winthrop',data:w,backgroundColor:'rgba(249,115,22,.85)',borderRadius:4},
+        {label:'Melville',data:m,backgroundColor:'rgba(56,189,248,.85)',borderRadius:4}
+      ]},options:{responsive:true,plugins:{legend:{labels:{color:'#cbd5e1'}}},scales:{x:{ticks:{color:'#94a3b8'},grid:{display:false}},y:{ticks:{color:'#94a3b8'},grid:{color:'rgba(255,255,255,.06)'}}}}});
+    }
+
+    function loadStaffForm(){
+      const store = document.getElementById('staffStore').value;
+      const shift = document.getElementById('staffShiftType').value;
+      if(shift === 'stocktake'){
+        document.getElementById('staffFormBody').innerHTML = '<div class="form-group"><label>Item</label><input placeholder="Item name"></div><div class="form-group"><label>Expected Qty</label><input type="number"></div><div class="form-group"><label>Counted Qty</label><input type="number"></div><div class="form-group"><label>Notes</label><textarea placeholder="Variance reason"></textarea></div><button class="btn primary">Submit Stock Take</button>';
+        return;
+      }
+      if(shift === 'adjustment'){
+        document.getElementById('staffFormBody').innerHTML = '<div class="form-group"><label>Item</label><input placeholder="Item name"></div><div class="form-group"><label>Adjustment Qty</label><input type="number"></div><div class="form-group"><label>Reason</label><select><option>wastage</option><option>spoilage</option><option>damaged</option><option>wrong count</option><option>transfer</option></select></div><div class="form-group"><label>Notes</label><textarea placeholder="Reason detail"></textarea></div><button class="btn primary">Submit Adjustment</button>';
+        return;
+      }
+      const list = checklists[store][shift];
+      document.getElementById('staffFormBody').innerHTML = '<div class="checklist">' + list.map(item => `<label class="check-item"><input type="checkbox"><span>${item}</span></label>`).join('') + '</div><div class="form-group" style="margin-top:12px"><label>Extra Notes</label><textarea placeholder="Anything Paul should know?"></textarea></div><button class="btn primary">Submit Checklist</button>';
+    }
+
+    function resetStaffForm(){
+      document.getElementById('staffName').value='';
+      document.getElementById('staffNotes').value='';
+      document.getElementById('staffShiftType').value='open';
+      document.getElementById('staffStore').value='winthrop';
+      document.getElementById('staffFormBody').innerHTML = '<div class="small">Choose shift type and load the form.</div>';
+    }
+
+    renderLists();
+    renderStorePace();
+    renderCharts();
+  </script>
 </body>
 </html>
