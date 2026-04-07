@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T07:55:29.807Z",
+  "generatedAt": "2026-04-07T07:59:53.369Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
@@ -98,6 +98,213 @@
       "issues": 0,
       "handoverNotes": 0
     }
+  },
+  "usageEngine": {
+    "mappings": [
+      {
+        "salesKey": "Fish Pack - Hake",
+        "menuItemId": "fish-pack-hake"
+      },
+      {
+        "salesKey": "Fish Pack - Barramundi",
+        "menuItemId": "fish-pack-barramundi"
+      },
+      {
+        "salesKey": "Battered Fetta",
+        "menuItemId": "battered-fetta"
+      },
+      {
+        "salesKey": "Large Chips",
+        "menuItemId": "chips-large"
+      }
+    ],
+    "usageByStore": {
+      "winthrop": [
+        {
+          "productKey": "hake-fillets",
+          "name": "Hake Fillets",
+          "usedQty": 120,
+          "unit": "pcs",
+          "estimatedCostUsed": 456,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "barra-fillets",
+          "name": "Barramundi Fillets",
+          "usedQty": 56,
+          "unit": "pcs",
+          "estimatedCostUsed": 302.4,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "chips",
+          "name": "Chips",
+          "usedQty": 98.6,
+          "unit": "kg",
+          "estimatedCostUsed": 216.92,
+          "current": 0,
+          "par": 40,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 4
+        },
+        {
+          "productKey": "fetta-blocks",
+          "name": "Fetta Blocks",
+          "usedQty": 38,
+          "unit": "serve",
+          "estimatedCostUsed": 91.2,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "tartare-sauce",
+          "name": "Tartare Sauce",
+          "usedQty": 176,
+          "unit": "serve",
+          "estimatedCostUsed": 61.6,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "oil",
+          "name": "Oil",
+          "usedQty": 1.9,
+          "unit": "bottle",
+          "estimatedCostUsed": 30.4,
+          "current": 0,
+          "par": 12,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 3
+        },
+        {
+          "productKey": "batter-mix",
+          "name": "Batter Mix",
+          "usedQty": 38,
+          "unit": "serve",
+          "estimatedCostUsed": 19,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "chicken-salt",
+          "name": "Chicken Salt",
+          "usedQty": 74,
+          "unit": "serve",
+          "estimatedCostUsed": 5.92,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        }
+      ],
+      "melville": [
+        {
+          "productKey": "hake-fillets",
+          "name": "Hake Fillets",
+          "usedQty": 102,
+          "unit": "pcs",
+          "estimatedCostUsed": 387.6,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "barra-fillets",
+          "name": "Barramundi Fillets",
+          "usedQty": 42,
+          "unit": "pcs",
+          "estimatedCostUsed": 226.8,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "chips",
+          "name": "Chips",
+          "usedQty": 80.9,
+          "unit": "kg",
+          "estimatedCostUsed": 177.98,
+          "current": 0,
+          "par": 35,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 4
+        },
+        {
+          "productKey": "fetta-blocks",
+          "name": "Fetta Blocks",
+          "usedQty": 29,
+          "unit": "serve",
+          "estimatedCostUsed": 69.6,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "tartare-sauce",
+          "name": "Tartare Sauce",
+          "usedQty": 144,
+          "unit": "serve",
+          "estimatedCostUsed": 50.4,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "oil",
+          "name": "Oil",
+          "usedQty": 1.45,
+          "unit": "bottle",
+          "estimatedCostUsed": 23.2,
+          "current": 0,
+          "par": 10,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 3
+        },
+        {
+          "productKey": "batter-mix",
+          "name": "Batter Mix",
+          "usedQty": 29,
+          "unit": "serve",
+          "estimatedCostUsed": 14.5,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        },
+        {
+          "productKey": "chicken-salt",
+          "name": "Chicken Salt",
+          "usedQty": 61,
+          "unit": "serve",
+          "estimatedCostUsed": 4.88,
+          "current": 0,
+          "par": 0,
+          "projectedAfterUsage": 0,
+          "suggestedOrderPacks": 0
+        }
+      ]
+    },
+    "notes": [
+      "Ingredient usage is currently estimated from mapped menu items and example sales mix.",
+      "Next step is replacing example sales mix with real POS item-level sales.",
+      "This layer is the bridge between sales, stock depletion, and supplier ordering."
+    ]
   },
   "menuSystem": {
     "menuItems": [
@@ -803,6 +1010,11 @@
       "mode": "json-linked-foundation",
       "live": true,
       "note": "Menu, ingredients, products, and suppliers are now linked for costing and ordering."
+    },
+    "usageEngine": {
+      "mode": "estimated-usage-foundation",
+      "live": false,
+      "note": "Usage engine now estimates stock depletion from mapped menu items; real POS item mapping still needed."
     }
   }
 }

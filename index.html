@@ -212,6 +212,7 @@
           <div class="card"><div class="section-title">Recurring Misses / Notes</div><div class="list" id="opsNotes"></div></div>
         </div>
         <div class="card"><div class="section-title">Stock / Par Status</div><div class="table-wrap"><table><thead><tr><th>Store</th><th>Item</th><th>Current</th><th>Par</th><th>Gap</th><th>Suggested Order</th><th>Status</th></tr></thead><tbody id="stockParTable"></tbody></table></div></div>
+        <div class="card"><div class="section-title">Usage Engine (Sales → Stock)</div><div class="table-wrap"><table><thead><tr><th>Store</th><th>Product</th><th>Used</th><th>Projected After Usage</th><th>Est Cost Used</th><th>Suggested Order</th></tr></thead><tbody id="usageEngineTable"></tbody></table></div></div>
       </section>
 
       <section id="screen-staff" class="screen hidden">
@@ -520,12 +521,22 @@
             });
           });
           document.getElementById('stockParTable').innerHTML = stockRows.join('');
+          const usageRows = [];
+          Object.entries(data.usageEngine?.usageByStore || {}).forEach(([store, items]) => {
+            (items || []).forEach(item => {
+              usageRows.push(`<tr><td>${store}</td><td>${item.name}</td><td>${item.usedQty} ${item.unit}</td><td>${item.projectedAfterUsage} ${item.unit}</td><td>$${Number(item.estimatedCostUsed || 0).toFixed(2)}</td><td>${item.suggestedOrderPacks ? item.suggestedOrderPacks + ' packs' : '—'}</td></tr>`);
+            });
+          });
+          document.getElementById('usageEngineTable').innerHTML = usageRows.join('');
           opsAlerts = [
             { text:`${Object.values(data.stockSystem.stores || {}).reduce((sum, s) => sum + (s.belowParCount || 0), 0)} items are below par across both stores.`, meta:'Order planning needed' },
             { text:`${Object.values(data.stockSystem.stores || {}).reduce((sum, s) => sum + (s.uncountedCount || 0), 0)} items are still uncounted.`, meta:'Staff stock take workflow next' },
-            { text:'Staff submissions file now exists and is ready for form wiring.', meta:'Backend foundation live' }
+            { text:'Sales-to-stock usage engine is now visible in the dashboard.', meta:'Bridge layer added' }
           ];
-          opsNotes = (data.stockSystem.notes || []).map(x => ({ text:x, meta:'Stock / ops system' }));
+          opsNotes = [
+            ...((data.stockSystem.notes || []).map(x => ({ text:x, meta:'Stock / ops system' }))),
+            ...((data.usageEngine?.notes || []).map(x => ({ text:x, meta:'Usage engine' })))
+          ];
         }
         if(data.productVision?.ownerTier?.purpose){
           priorities = (data.ownerInsights?.priorities || []).map(x => ({ text:x, meta:'Owner priority' }));
