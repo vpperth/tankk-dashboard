@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T07:23:01.514Z",
+  "generatedAt": "2026-04-07T07:51:41.736Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
@@ -86,6 +86,133 @@
       "Improving review quality",
       "Less owner dependency",
       "Documented growth engine"
+    ]
+  },
+  "staffSubmissions": {
+    "generatedAt": "2026-04-07T07:50:00.000Z",
+    "submissions": [],
+    "summary": {
+      "openChecklists": 0,
+      "closeChecklists": 0,
+      "stockTakes": 0,
+      "issues": 0,
+      "handoverNotes": 0
+    }
+  },
+  "stockSystem": {
+    "stores": {
+      "winthrop": {
+        "items": [
+          {
+            "key": "fish-fillets",
+            "name": "Fish Fillets",
+            "unit": "pcs",
+            "par": 80,
+            "current": 0,
+            "gap": 80,
+            "orderPack": 20,
+            "suggestedOrder": 4,
+            "status": "uncounted"
+          },
+          {
+            "key": "chips",
+            "name": "Chips",
+            "unit": "kg",
+            "par": 40,
+            "current": 0,
+            "gap": 40,
+            "orderPack": 10,
+            "suggestedOrder": 4,
+            "status": "uncounted"
+          },
+          {
+            "key": "oil",
+            "name": "Oil",
+            "unit": "bottles",
+            "par": 12,
+            "current": 0,
+            "gap": 12,
+            "orderPack": 4,
+            "suggestedOrder": 3,
+            "status": "uncounted"
+          },
+          {
+            "key": "battered-fetta",
+            "name": "Battered Fetta",
+            "unit": "pcs",
+            "par": 24,
+            "current": 0,
+            "gap": 24,
+            "orderPack": 12,
+            "suggestedOrder": 2,
+            "status": "uncounted"
+          }
+        ],
+        "belowParCount": 0,
+        "uncountedCount": 4
+      },
+      "melville": {
+        "items": [
+          {
+            "key": "fish-fillets",
+            "name": "Fish Fillets",
+            "unit": "pcs",
+            "par": 70,
+            "current": 0,
+            "gap": 70,
+            "orderPack": 20,
+            "suggestedOrder": 4,
+            "status": "uncounted"
+          },
+          {
+            "key": "chips",
+            "name": "Chips",
+            "unit": "kg",
+            "par": 35,
+            "current": 0,
+            "gap": 35,
+            "orderPack": 10,
+            "suggestedOrder": 4,
+            "status": "uncounted"
+          },
+          {
+            "key": "oil",
+            "name": "Oil",
+            "unit": "bottles",
+            "par": 10,
+            "current": 0,
+            "gap": 10,
+            "orderPack": 4,
+            "suggestedOrder": 3,
+            "status": "uncounted"
+          },
+          {
+            "key": "battered-fetta",
+            "name": "Battered Fetta",
+            "unit": "pcs",
+            "par": 18,
+            "current": 0,
+            "gap": 18,
+            "orderPack": 12,
+            "suggestedOrder": 2,
+            "status": "uncounted"
+          }
+        ],
+        "belowParCount": 0,
+        "uncountedCount": 4
+      }
+    },
+    "summary": {
+      "openChecklists": 0,
+      "closeChecklists": 0,
+      "stockTakes": 0,
+      "issues": 0,
+      "handoverNotes": 0
+    },
+    "notes": [
+      "Par levels are now part of the dashboard data layer.",
+      "Current stock counts still need staff input workflow.",
+      "Suggested orders are generated from par gap once counts are entered."
     ]
   },
   "commandCentre": {
@@ -333,6 +460,11 @@
       "mode": "manual-insight-placeholder",
       "live": false,
       "note": "Uber and Google feedback concepts added to dashboard structure; ingestion still to be built."
+    },
+    "staffOps": {
+      "mode": "json-persistent-foundation",
+      "live": true,
+      "note": "Staff submissions and par-level storage files now exist and are ready to be wired into forms."
     }
   }
 }

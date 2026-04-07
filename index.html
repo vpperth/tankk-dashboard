@@ -203,14 +203,15 @@
 
       <section id="screen-ops" class="screen hidden">
         <div class="grid three-col">
-          <div class="card"><div class="section-title">Checklist Compliance</div><div class="metric">—</div><div class="small">Needs backend wiring</div></div>
-          <div class="card"><div class="section-title">Stock Variances</div><div class="metric">1 flagged</div><div class="small">Chicken fillet variance sample</div></div>
-          <div class="card"><div class="section-title">Open Issues</div><div class="metric">3</div><div class="small">Across both stores</div></div>
+          <div class="card"><div class="section-title">Open Checklists</div><div class="metric" id="opsOpenCount">0</div><div class="small">Submitted into staff ops layer</div></div>
+          <div class="card"><div class="section-title">Stock Takes</div><div class="metric" id="opsStockTakeCount">0</div><div class="small">Foundation live, counts still need input</div></div>
+          <div class="card"><div class="section-title">Open Issues</div><div class="metric" id="opsIssueCount">0</div><div class="small">Across both stores</div></div>
         </div>
         <div class="grid two-col">
           <div class="card"><div class="section-title">Ops Alerts</div><div class="list" id="opsAlerts"></div></div>
           <div class="card"><div class="section-title">Recurring Misses / Notes</div><div class="list" id="opsNotes"></div></div>
         </div>
+        <div class="card"><div class="section-title">Stock / Par Status</div><div class="table-wrap"><table><thead><tr><th>Store</th><th>Item</th><th>Current</th><th>Par</th><th>Gap</th><th>Suggested Order</th><th>Status</th></tr></thead><tbody id="stockParTable"></tbody></table></div></div>
       </section>
 
       <section id="screen-staff" class="screen hidden">
@@ -499,6 +500,24 @@
             melville: d.melville || 0,
             notes: d.notes || ''
           }));
+        }
+        if(data.stockSystem){
+          document.getElementById('opsOpenCount').textContent = data.staffSubmissions?.summary?.openChecklists || 0;
+          document.getElementById('opsStockTakeCount').textContent = data.staffSubmissions?.summary?.stockTakes || 0;
+          document.getElementById('opsIssueCount').textContent = data.staffSubmissions?.summary?.issues || 0;
+          const stockRows = [];
+          Object.entries(data.stockSystem.stores || {}).forEach(([store, info]) => {
+            (info.items || []).forEach(item => {
+              stockRows.push(`<tr><td>${store}</td><td>${item.name}</td><td>${item.current} ${item.unit}</td><td>${item.par} ${item.unit}</td><td>${item.gap} ${item.unit}</td><td>${item.suggestedOrder ? item.suggestedOrder + ' packs' : '—'}</td><td>${item.status}</td></tr>`);
+            });
+          });
+          document.getElementById('stockParTable').innerHTML = stockRows.join('');
+          opsAlerts = [
+            { text:`${Object.values(data.stockSystem.stores || {}).reduce((sum, s) => sum + (s.belowParCount || 0), 0)} items are below par across both stores.`, meta:'Order planning needed' },
+            { text:`${Object.values(data.stockSystem.stores || {}).reduce((sum, s) => sum + (s.uncountedCount || 0), 0)} items are still uncounted.`, meta:'Staff stock take workflow next' },
+            { text:'Staff submissions file now exists and is ready for form wiring.', meta:'Backend foundation live' }
+          ];
+          opsNotes = (data.stockSystem.notes || []).map(x => ({ text:x, meta:'Stock / ops system' }));
         }
         if(data.productVision?.ownerTier?.purpose){
           priorities = (data.ownerInsights?.priorities || []).map(x => ({ text:x, meta:'Owner priority' }));
