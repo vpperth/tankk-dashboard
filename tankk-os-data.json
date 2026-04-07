@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T07:59:53.369Z",
+  "generatedAt": "2026-04-07T08:03:13.097Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
@@ -98,6 +98,80 @@
       "issues": 0,
       "handoverNotes": 0
     }
+  },
+  "posMapping": {
+    "totalItems": 8,
+    "mappedItems": 4,
+    "unmappedItems": 4,
+    "coveragePct": 50,
+    "unmapped": [
+      {
+        "posName": "Flake Pack",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": null
+      },
+      {
+        "posName": "Snapper Pack",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": null
+      },
+      {
+        "posName": "Kids Fish & Chips",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": null
+      },
+      {
+        "posName": "Calamari Pack",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": null
+      }
+    ],
+    "mapped": [
+      {
+        "posName": "Fish Pack - Hake",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "fish-pack-hake"
+      },
+      {
+        "posName": "Fish Pack - Barramundi",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "fish-pack-barramundi"
+      },
+      {
+        "posName": "Battered Fetta",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "battered-fetta"
+      },
+      {
+        "posName": "Large Chips",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "chips-large"
+      }
+    ]
   },
   "usageEngine": {
     "mappings": [
@@ -1015,6 +1089,11 @@
       "mode": "estimated-usage-foundation",
       "live": false,
       "note": "Usage engine now estimates stock depletion from mapped menu items; real POS item mapping still needed."
+    },
+    "posMapping": {
+      "mode": "coverage-audit",
+      "live": true,
+      "note": "POS mapping coverage is 50% (4/8)."
     }
   }
 }
