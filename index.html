@@ -240,20 +240,15 @@
   </div>
 
   <script>
-    const weekly = {
+    let weekly = {
       combined: { revenue: 24370.75, target: 28500, customers: 830, uber: 5220.75 },
       winthrop: { revenue: 12850.50, target: 15000 },
       melville: { revenue: 11520.25, target: 13500 }
     };
 
-    const daily = [
-      { date:'Mar 23', winthrop:1350.5, melville:1130.25, notes:'Slow Sunday baseline' },
-      { date:'Mar 24', winthrop:2370.75, melville:2000.75, notes:'Good Tuesday lift' },
-      { date:'Mar 25', winthrop:2060.4, melville:1760.6, notes:'Midweek steady' },
-      { date:'Mar 26', winthrop:2340.25, melville:2135.75, notes:'Healthy pace' },
-      { date:'Mar 27', winthrop:2550.35, melville:2275.4, notes:'Friday building' },
-      { date:'Mar 28', winthrop:2970.6, melville:2580.25, notes:'Saturday strong' },
-      { date:'Mar 29', winthrop:3380.15, melville:2990.85, notes:'Sunday peak' },
+    let daily = [
+      { date:'2026-03-24', winthrop:2370.75, melville:2000.75, notes:'Good Tuesday lift' },
+      { date:'2026-03-26', winthrop:0, melville:0, notes:'Missing data / failed sync sample' }
     ];
 
     const priorities = [
@@ -412,9 +407,55 @@
       document.getElementById('staffFormBody').innerHTML = '<div class="small">Choose shift type and load the form.</div>';
     }
 
-    renderLists();
-    renderStorePace();
-    renderCharts();
+    async function loadTankkOsData(){
+      try {
+        const res = await fetch('tankk-os-data.json', { cache: 'no-store' });
+        if(!res.ok) return;
+        const data = await res.json();
+        if(data.commandCentre){
+          weekly = {
+            combined: {
+              revenue: data.commandCentre.weeklySales || 0,
+              target: data.commandCentre.weeklyTarget || 28500,
+              customers: data.commandCentre.customers || 0,
+              uber: data.commandCentre.uberRevenue || 0
+            },
+            winthrop: {
+              revenue: data.stores?.winthrop?.weeklyRevenue || 0,
+              target: data.stores?.winthrop?.target || 15000
+            },
+            melville: {
+              revenue: data.stores?.melville?.weeklyRevenue || 0,
+              target: data.stores?.melville?.target || 13500
+            }
+          };
+          document.getElementById('ccSales').textContent = money(data.commandCentre.weeklySales || 0);
+          document.getElementById('ccAch').textContent = (data.commandCentre.weeklyAchPct || 0) + '%';
+          document.getElementById('ccGap').textContent = money(data.commandCentre.weeklyGap || 0);
+          document.getElementById('ccCustomers').textContent = (data.commandCentre.customers || 0).toLocaleString();
+          document.getElementById('ccUberMix').textContent = ((data.commandCentre.weeklySales || 0) ? Math.round(((data.commandCentre.uberRevenue || 0) / data.commandCentre.weeklySales) * 100) : 0) + '%';
+          document.getElementById('ccAov').textContent = '$' + Number(data.commandCentre.aov || 0).toFixed(2);
+          document.getElementById('ccAchBar').style.width = Math.min(data.commandCentre.weeklyAchPct || 0, 100) + '%';
+        }
+        if(Array.isArray(data.dailySales) && data.dailySales.length){
+          daily = data.dailySales.map(d => ({
+            date: d.date,
+            winthrop: d.winthrop || 0,
+            melville: d.melville || 0,
+            notes: d.notes || ''
+          }));
+        }
+        renderStorePace();
+        renderCharts();
+        renderLists();
+      } catch(e) {
+        renderLists();
+        renderStorePace();
+        renderCharts();
+      }
+    }
+
+    loadTankkOsData();
   </script>
 </body>
 </html>

@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-04-07T05:53:20.924Z",
+  "targets": {
+    "winthrop": 15000,
+    "melville": 13500,
+    "combined": 28500
+  },
+  "commandCentre": {
+    "weeklySales": 24370.75,
+    "weeklyTarget": 28500,
+    "weeklyGap": 4129.25,
+    "weeklyAchPct": 86,
+    "customers": 830,
+    "uberRevenue": 5220.75,
+    "uberOrders": 265,
+    "aov": 29.36234939759036,
+    "syncedAt": "2026-03-24T21:00:00+08:00"
+  },
+  "stores": {
+    "winthrop": {
+      "weeklyRevenue": 12850.5,
+      "target": 15000,
+      "customers": 445,
+      "uberRevenue": 2650.5,
+      "uberOrders": 125,
+      "achievementPct": 86
+    },
+    "melville": {
+      "weeklyRevenue": 11520.25,
+      "target": 13500,
+      "customers": 385,
+      "uberRevenue": 2570.25,
+      "uberOrders": 140,
+      "achievementPct": 85
+    }
+  },
+  "dailySales": [
+    {
+      "date": "2026-03-24",
+      "winthrop": 2370.75,
+      "melville": 2000.75,
+      "notes": "Regular trading. Winthrop +$120 vs last Tue (22 Mar). Melville +$50 vs last Tue. No issues reported.",
+      "syncTime": "2026-03-24T21:00:00+08:00"
+    },
+    {
+      "date": "2026-03-26",
+      "winthrop": 0,
+      "melville": 0,
+      "notes": "",
+      "syncTime": "2026-03-26T13:00:37.667Z"
+    }
+  ],
+  "integrationStatus": {
+    "kounta": {
+      "mode": "snapshot-json",
+      "live": false,
+      "note": "Using saved daily sales snapshots; direct live Kounta pull not hardened yet."
+    },
+    "foundu": {
+      "mode": "not-yet-wired",
+      "live": false,
+      "note": "FoundU API exists but labour summary file not built yet."
+    },
+    "cron": {
+      "mode": "needs-export",
+      "live": false,
+      "note": "Automation tab should be fed from cron status export."
+    }
+  }
+}
