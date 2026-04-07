@@ -1,0 +1,18 @@
+[
+  {
+    "month": "2026-03",
+    "winthrop": 2371,
+    "melville": 2001,
+    "customers": 118,
+    "dailyBreakdown": {
+      "2026-03-24": {
+        "winthrop": 2370.75,
+        "melville": 2000.75
+      },
+      "2026-03-26": {
+        "winthrop": 0,
+        "melville": 0
+      }
+    }
+  }
+]
