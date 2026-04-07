@@ -259,6 +259,10 @@
           <div class="card"><div class="section-title">Labour Summary</div><div class="list" id="labourSummaryList"></div></div>
           <div class="card"><div class="section-title">Integration Status</div><div class="list" id="integrationStatusList"></div></div>
         </div>
+        <div class="grid two-col">
+          <div class="card"><div class="section-title">Menu Costing</div><div class="table-wrap"><table><thead><tr><th>Item</th><th>Sell</th><th>Est Cost</th><th>Margin</th><th>Margin %</th></tr></thead><tbody id="menuCostingTable"></tbody></table></div></div>
+          <div class="card"><div class="section-title">Suppliers</div><div class="list" id="supplierList"></div></div>
+        </div>
         <div class="card"><div class="section-title">Admin Notes</div><div class="list" id="adminNotes"></div></div>
       </section>
     </main>
@@ -500,6 +504,10 @@
             melville: d.melville || 0,
             notes: d.notes || ''
           }));
+        }
+        if(data.menuSystem){
+          document.getElementById('menuCostingTable').innerHTML = (data.menuSystem.menuItems || []).map(item => `<tr><td>${item.name}</td><td>$${Number(item.sellPrice || 0).toFixed(2)}</td><td>$${Number(item.estimatedCost || 0).toFixed(2)}</td><td>$${Number(item.estimatedMargin || 0).toFixed(2)}</td><td>${item.estimatedMarginPct || 0}%</td></tr>`).join('');
+          document.getElementById('supplierList').innerHTML = (data.menuSystem.suppliers || []).map(s => `<div class="item"><div>${s.name}</div><div class="meta">Supplies: ${(s.products || []).join(', ')} · Lead time: ${s.leadDays || '?'} days</div></div>`).join('');
         }
         if(data.stockSystem){
           document.getElementById('opsOpenCount').textContent = data.staffSubmissions?.summary?.openChecklists || 0;

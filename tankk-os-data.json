@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T07:51:41.736Z",
+  "generatedAt": "2026-04-07T07:55:29.807Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
@@ -98,6 +98,339 @@
       "issues": 0,
       "handoverNotes": 0
     }
+  },
+  "menuSystem": {
+    "menuItems": [
+      {
+        "id": "fish-pack-hake",
+        "name": "Fish Pack - Hake",
+        "category": "fish-packs",
+        "sellPrice": 14.5,
+        "estimatedCost": 4.92,
+        "estimatedMargin": 9.58,
+        "estimatedMarginPct": 66,
+        "ingredients": [
+          {
+            "productKey": "hake-fillets",
+            "name": "Hake Fillets",
+            "qty": 1,
+            "unit": "pcs",
+            "costPerUnit": 3.8,
+            "ingredientCost": 3.8,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              },
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.35,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 0.77,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "tartare-sauce",
+            "name": "Tartare Sauce",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.35,
+            "ingredientCost": 0.35,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fish-pack-barramundi",
+        "name": "Fish Pack - Barramundi",
+        "category": "fish-packs",
+        "sellPrice": 18.9,
+        "estimatedCost": 6.52,
+        "estimatedMargin": 12.38,
+        "estimatedMarginPct": 66,
+        "ingredients": [
+          {
+            "productKey": "barra-fillets",
+            "name": "Barramundi Fillets",
+            "qty": 1,
+            "unit": "pcs",
+            "costPerUnit": 5.4,
+            "ingredientCost": 5.4,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              },
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.35,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 0.77,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "tartare-sauce",
+            "name": "Tartare Sauce",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.35,
+            "ingredientCost": 0.35,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "battered-fetta",
+        "name": "Battered Fetta",
+        "category": "specials",
+        "sellPrice": 12.5,
+        "estimatedCost": 3.7,
+        "estimatedMargin": 8.8,
+        "estimatedMarginPct": 70,
+        "ingredients": [
+          {
+            "productKey": "fetta-blocks",
+            "name": "Fetta Blocks",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 2.4,
+            "ingredientCost": 2.4,
+            "suppliers": [
+              {
+                "id": "local-dairy",
+                "name": "Local Dairy Supplier",
+                "leadDays": 1
+              }
+            ]
+          },
+          {
+            "productKey": "batter-mix",
+            "name": "Batter Mix",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.5,
+            "ingredientCost": 0.5,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "oil",
+            "name": "Oil",
+            "qty": 0.05,
+            "unit": "bottle-equivalent",
+            "costPerUnit": 16,
+            "ingredientCost": 0.8,
+            "suppliers": [
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chips-large",
+        "name": "Large Chips",
+        "category": "sides",
+        "sellPrice": 8.5,
+        "estimatedCost": 1.18,
+        "estimatedMargin": 7.32,
+        "estimatedMarginPct": 86,
+        "ingredients": [
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.5,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 1.1,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chicken-salt",
+            "name": "Chicken Salt",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.08,
+            "ingredientCost": 0.08,
+            "suppliers": [
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "products": [
+      {
+        "key": "hake-fillets",
+        "name": "Hake Fillets",
+        "category": "fish",
+        "unit": "pcs",
+        "costPerUnit": 3.8
+      },
+      {
+        "key": "barra-fillets",
+        "name": "Barramundi Fillets",
+        "category": "fish",
+        "unit": "pcs",
+        "costPerUnit": 5.4
+      },
+      {
+        "key": "chips",
+        "name": "Chips",
+        "category": "potato",
+        "unit": "kg",
+        "costPerUnit": 2.2
+      },
+      {
+        "key": "oil",
+        "name": "Oil",
+        "category": "fry",
+        "unit": "bottle",
+        "costPerUnit": 16
+      },
+      {
+        "key": "tartare-sauce",
+        "name": "Tartare Sauce",
+        "category": "sauce",
+        "unit": "serve",
+        "costPerUnit": 0.35
+      },
+      {
+        "key": "chicken-salt",
+        "name": "Chicken Salt",
+        "category": "seasoning",
+        "unit": "serve",
+        "costPerUnit": 0.08
+      },
+      {
+        "key": "fetta-blocks",
+        "name": "Fetta Blocks",
+        "category": "specials",
+        "unit": "serve",
+        "costPerUnit": 2.4
+      },
+      {
+        "key": "batter-mix",
+        "name": "Batter Mix",
+        "category": "dry",
+        "unit": "serve",
+        "costPerUnit": 0.5
+      }
+    ],
+    "suppliers": [
+      {
+        "id": "bidfood",
+        "name": "Bidfood",
+        "categories": [
+          "fish",
+          "potato",
+          "dry",
+          "sauce"
+        ],
+        "leadDays": 2,
+        "products": [
+          "hake-fillets",
+          "barra-fillets",
+          "chips",
+          "tartare-sauce",
+          "batter-mix"
+        ]
+      },
+      {
+        "id": "pfd",
+        "name": "PFD",
+        "categories": [
+          "fish",
+          "fry",
+          "seasoning"
+        ],
+        "leadDays": 2,
+        "products": [
+          "hake-fillets",
+          "barra-fillets",
+          "oil",
+          "chicken-salt"
+        ]
+      },
+      {
+        "id": "local-dairy",
+        "name": "Local Dairy Supplier",
+        "categories": [
+          "specials"
+        ],
+        "leadDays": 1,
+        "products": [
+          "fetta-blocks"
+        ]
+      }
+    ],
+    "notes": [
+      "Menu items now connect to ingredients, estimated cost, and linked suppliers.",
+      "This is the backbone for COGS, stock usage, and ordering logic.",
+      "Next step is mapping actual POS sales to ingredient depletion."
+    ]
   },
   "stockSystem": {
     "stores": {
@@ -465,6 +798,11 @@
       "mode": "json-persistent-foundation",
       "live": true,
       "note": "Staff submissions and par-level storage files now exist and are ready to be wired into forms."
+    },
+    "menuCosting": {
+      "mode": "json-linked-foundation",
+      "live": true,
+      "note": "Menu, ingredients, products, and suppliers are now linked for costing and ordering."
     }
   }
 }
