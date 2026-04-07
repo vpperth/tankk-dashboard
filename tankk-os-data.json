@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-07T08:03:13.097Z",
+  "generatedAt": "2026-04-07T08:05:31.222Z",
   "targets": {
     "winthrop": 15000,
     "melville": 13500,
@@ -101,43 +101,10 @@
   },
   "posMapping": {
     "totalItems": 8,
-    "mappedItems": 4,
-    "unmappedItems": 4,
-    "coveragePct": 50,
-    "unmapped": [
-      {
-        "posName": "Flake Pack",
-        "stores": [
-          "winthrop",
-          "melville"
-        ],
-        "mappedMenuItemId": null
-      },
-      {
-        "posName": "Snapper Pack",
-        "stores": [
-          "winthrop",
-          "melville"
-        ],
-        "mappedMenuItemId": null
-      },
-      {
-        "posName": "Kids Fish & Chips",
-        "stores": [
-          "winthrop",
-          "melville"
-        ],
-        "mappedMenuItemId": null
-      },
-      {
-        "posName": "Calamari Pack",
-        "stores": [
-          "winthrop",
-          "melville"
-        ],
-        "mappedMenuItemId": null
-      }
-    ],
+    "mappedItems": 8,
+    "unmappedItems": 0,
+    "coveragePct": 100,
+    "unmapped": [],
     "mapped": [
       {
         "posName": "Fish Pack - Hake",
@@ -170,6 +137,38 @@
           "melville"
         ],
         "mappedMenuItemId": "chips-large"
+      },
+      {
+        "posName": "Flake Pack",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "flake-pack"
+      },
+      {
+        "posName": "Snapper Pack",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "snapper-pack"
+      },
+      {
+        "posName": "Kids Fish & Chips",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "kids-fish-chips"
+      },
+      {
+        "posName": "Calamari Pack",
+        "stores": [
+          "winthrop",
+          "melville"
+        ],
+        "mappedMenuItemId": "calamari-pack"
       }
     ]
   },
@@ -600,6 +599,250 @@
             ]
           }
         ]
+      },
+      {
+        "id": "flake-pack",
+        "name": "Flake Pack",
+        "category": "fish-packs",
+        "sellPrice": 15.9,
+        "estimatedCost": 5.52,
+        "estimatedMargin": 10.38,
+        "estimatedMarginPct": 65,
+        "ingredients": [
+          {
+            "productKey": "flake-fillets",
+            "name": "Flake Fillets",
+            "qty": 1,
+            "unit": "pcs",
+            "costPerUnit": 4.4,
+            "ingredientCost": 4.4,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              },
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.35,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 0.77,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "tartare-sauce",
+            "name": "Tartare Sauce",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.35,
+            "ingredientCost": 0.35,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "snapper-pack",
+        "name": "Snapper Pack",
+        "category": "fish-packs",
+        "sellPrice": 19.9,
+        "estimatedCost": 7.32,
+        "estimatedMargin": 12.58,
+        "estimatedMarginPct": 63,
+        "ingredients": [
+          {
+            "productKey": "snapper-fillets",
+            "name": "Snapper Fillets",
+            "qty": 1,
+            "unit": "pcs",
+            "costPerUnit": 6.2,
+            "ingredientCost": 6.2,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              },
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.35,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 0.77,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "tartare-sauce",
+            "name": "Tartare Sauce",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.35,
+            "ingredientCost": 0.35,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "kids-fish-chips",
+        "name": "Kids Fish & Chips",
+        "category": "kids",
+        "sellPrice": 11.9,
+        "estimatedCost": 2.52,
+        "estimatedMargin": 9.38,
+        "estimatedMarginPct": 79,
+        "ingredients": [
+          {
+            "productKey": "hake-fillets",
+            "name": "Hake Fillets",
+            "qty": 0.5,
+            "unit": "pcs",
+            "costPerUnit": 3.8,
+            "ingredientCost": 1.9,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              },
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.2,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 0.44,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "tomato-sauce",
+            "name": "Tomato Sauce",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.18,
+            "ingredientCost": 0.18,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "calamari-pack",
+        "name": "Calamari Pack",
+        "category": "seafood-packs",
+        "sellPrice": 17.5,
+        "estimatedCost": 4.22,
+        "estimatedMargin": 13.28,
+        "estimatedMarginPct": 76,
+        "ingredients": [
+          {
+            "productKey": "calamari",
+            "name": "Calamari",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 3.1,
+            "ingredientCost": 3.1,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              },
+              {
+                "id": "pfd",
+                "name": "PFD",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "chips",
+            "name": "Chips",
+            "qty": 0.35,
+            "unit": "kg",
+            "costPerUnit": 2.2,
+            "ingredientCost": 0.77,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          },
+          {
+            "productKey": "tartare-sauce",
+            "name": "Tartare Sauce",
+            "qty": 1,
+            "unit": "serve",
+            "costPerUnit": 0.35,
+            "ingredientCost": 0.35,
+            "suppliers": [
+              {
+                "id": "bidfood",
+                "name": "Bidfood",
+                "leadDays": 2
+              }
+            ]
+          }
+        ]
       }
     ],
     "products": [
@@ -658,6 +901,34 @@
         "category": "dry",
         "unit": "serve",
         "costPerUnit": 0.5
+      },
+      {
+        "key": "flake-fillets",
+        "name": "Flake Fillets",
+        "category": "fish",
+        "unit": "pcs",
+        "costPerUnit": 4.4
+      },
+      {
+        "key": "snapper-fillets",
+        "name": "Snapper Fillets",
+        "category": "fish",
+        "unit": "pcs",
+        "costPerUnit": 6.2
+      },
+      {
+        "key": "calamari",
+        "name": "Calamari",
+        "category": "seafood",
+        "unit": "serve",
+        "costPerUnit": 3.1
+      },
+      {
+        "key": "tomato-sauce",
+        "name": "Tomato Sauce",
+        "category": "sauce",
+        "unit": "serve",
+        "costPerUnit": 0.18
       }
     ],
     "suppliers": [
@@ -668,14 +939,19 @@
           "fish",
           "potato",
           "dry",
-          "sauce"
+          "sauce",
+          "seafood"
         ],
         "leadDays": 2,
         "products": [
           "hake-fillets",
           "barra-fillets",
+          "flake-fillets",
+          "snapper-fillets",
+          "calamari",
           "chips",
           "tartare-sauce",
+          "tomato-sauce",
           "batter-mix"
         ]
       },
@@ -685,12 +961,16 @@
         "categories": [
           "fish",
           "fry",
-          "seasoning"
+          "seasoning",
+          "seafood"
         ],
         "leadDays": 2,
         "products": [
           "hake-fillets",
           "barra-fillets",
+          "flake-fillets",
+          "snapper-fillets",
+          "calamari",
           "oil",
           "chicken-salt"
         ]
@@ -1093,7 +1373,7 @@
     "posMapping": {
       "mode": "coverage-audit",
       "live": true,
-      "note": "POS mapping coverage is 50% (4/8)."
+      "note": "POS mapping coverage is 100% (8/8)."
     }
   }
 }
