@@ -221,18 +221,22 @@
 
       <section id="screen-automations" class="screen hidden">
         <div class="grid three-col">
-          <div class="card"><div class="section-title">Nightly Sales Sync</div><div class="metric">Active</div><div class="small">Needs surface in cron/job status</div></div>
-          <div class="card"><div class="section-title">Weekly Sales Brief</div><div class="metric">Monday 6 AM</div><div class="small">Already conceptually built</div></div>
-          <div class="card"><div class="section-title">Checklist Alerts</div><div class="metric">Planned</div><div class="small">Wire after backend is real</div></div>
+          <div class="card"><div class="section-title">Total Jobs</div><div class="metric" id="autoTotalJobs">0</div><div class="small">Exported from actual cron state</div></div>
+          <div class="card"><div class="section-title">Healthy Jobs</div><div class="metric" id="autoHealthyJobs">0</div><div class="small">Last status OK</div></div>
+          <div class="card"><div class="section-title">Broken Jobs</div><div class="metric" id="autoBrokenJobs">0</div><div class="small">Need cleanup / fix</div></div>
         </div>
-        <div class="card"><div class="section-title">Automation Queue</div><div class="table-wrap"><table><thead><tr><th>Job</th><th>Status</th><th>Last Run</th><th>Next Run</th><th>Owner Impact</th></tr></thead><tbody id="automationTable"></tbody></table></div></div>
+        <div class="card"><div class="section-title">Automation Queue</div><div class="table-wrap"><table><thead><tr><th>Job</th><th>Status</th><th>Last Run</th><th>Next Run</th><th>Error / Notes</th></tr></thead><tbody id="automationTable"></tbody></table></div></div>
       </section>
 
       <section id="screen-admin" class="screen hidden">
         <div class="grid three-col">
           <div class="card"><div class="section-title">Primary Model</div><div class="metric">Sonnet 4.6</div><div class="small">Fallbacks removed</div></div>
-          <div class="card"><div class="section-title">Data Freshness</div><div class="metric">29 Mar</div><div class="small">Need Apr 6 backfill</div></div>
-          <div class="card"><div class="section-title">Frontend</div><div class="metric">GitHub Pages</div><div class="small">Live deployment</div></div>
+          <div class="card"><div class="section-title">Labour Source</div><div class="metric" id="labourSource">FoundU</div><div class="small" id="labourSourceState">Schema ready</div></div>
+          <div class="card"><div class="section-title">Data Freshness</div><div class="metric" id="adminDataFreshness">—</div><div class="small">Latest owner snapshot timestamp</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="section-title">Labour Summary</div><div class="list" id="labourSummaryList"></div></div>
+          <div class="card"><div class="section-title">Integration Status</div><div class="list" id="integrationStatusList"></div></div>
         </div>
         <div class="card"><div class="section-title">Admin Notes</div><div class="list" id="adminNotes"></div></div>
       </section>
@@ -287,14 +291,14 @@
       { text:'Maintenance / issue log should sit here too.', meta:'Not buried in handovers' },
     ];
 
-    const automationRows = [
+    let automationRows = [
       ['Nightly sales sync','planned/live hybrid','9:00 PM','Tonight 9:00 PM','Updates sales snapshots'],
       ['Weekly sales brief','active concept','Mon 6:00 AM','Next Monday 6:00 AM','Owner weekly summary'],
       ['Checklist miss alert','planned','—','After backend','Flags incomplete shifts'],
       ['Marketing prompt','planned','—','Weekly','Tells owner what needs posting'],
     ];
 
-    const adminNotes = [
+    let adminNotes = [
       { text:'Model locked to Sonnet 4.6 only. No silent fallback.', meta:'Config updated today' },
       { text:'GitHub Pages is live, but frontend needs rebuild around Tankk OS.', meta:'This file is the new direction' },
       { text:'Need one clean backend for submissions + automation status.', meta:'Don’t scatter data' },
@@ -445,6 +449,43 @@
             notes: d.notes || ''
           }));
         }
+        if(data.automationSummary){
+          const jobs = data.automationSummary.jobs || [];
+          const healthy = jobs.filter(j => j.status === 'ok').length;
+          const broken = jobs.filter(j => j.status && j.status !== 'ok').length;
+          document.getElementById('autoTotalJobs').textContent = jobs.length;
+          document.getElementById('autoHealthyJobs').textContent = healthy;
+          document.getElementById('autoBrokenJobs').textContent = broken;
+          const fmtTs = (ms) => ms ? new Date(ms).toLocaleString('en-AU', { timeZone:'Australia/Perth' }) : '—';
+          automationRows = jobs.map(j => [
+            j.name,
+            j.status || (j.enabled ? 'enabled' : 'disabled'),
+            fmtTs(j.lastRunAtMs),
+            fmtTs(j.nextRunAtMs),
+            j.lastError || (j.enabled ? 'No recent error' : 'Disabled')
+          ]);
+        }
+        if(data.labourSummary){
+          document.getElementById('labourSource').textContent = data.labourSummary.source || 'FoundU';
+          document.getElementById('labourSourceState').textContent = data.labourSummary.status || 'unknown';
+          document.getElementById('labourSummaryList').innerHTML = [
+            `Week wages: $${Number(data.labourSummary.summary?.weekWages || 0).toLocaleString()}`,
+            `Labour %: ${Number(data.labourSummary.summary?.labourPct || 0).toFixed(1)}%`,
+            `Pending approvals: ${data.labourSummary.summary?.pendingApprovals || 0}`,
+            `Flagged shifts: ${data.labourSummary.summary?.flaggedShifts || 0}`
+          ].map(x => `<div class="item">${x}</div>`).join('');
+        }
+        if(data.integrationStatus){
+          document.getElementById('integrationStatusList').innerHTML = Object.entries(data.integrationStatus).map(([k,v]) => `<div class="item"><div><strong>${k}</strong>: ${v.mode}</div><div class="meta">${v.note}</div></div>`).join('');
+        }
+        if(data.generatedAt){
+          document.getElementById('adminDataFreshness').textContent = new Date(data.generatedAt).toLocaleString('en-AU', { timeZone:'Australia/Perth' });
+        }
+        adminNotes = [
+          { text:'Model locked to Sonnet 4.6 only. No silent fallback.', meta:'Config updated today' },
+          { text:`Automation export currently shows ${(data.automationSummary?.jobs || []).filter(j => j.status && j.status !== 'ok').length} broken jobs.`, meta:'Cron cleanup still needed' },
+          { text:data.labourSummary?.notes?.[0] || 'FoundU labour summary pending wiring.', meta:'Labour pipeline status' },
+        ];
         renderStorePace();
         renderCharts();
         renderLists();
